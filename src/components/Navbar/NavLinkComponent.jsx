@@ -15,8 +15,25 @@ const activeThemeWhenDarkMode = createTheme({
 
 const inactiveThemeWhenDarkMode = createTheme({
   palette: {
-    primary: 
-    {main :blue[500]}
+    primary: {
+      main : "#2196f3"
+    }
+  }
+});
+
+const activeThemeWhenLightMode = createTheme({
+  palette: {
+    primary: {
+      main: "#ffea00"
+    }
+  },
+});
+
+const inactiveThemeWhenLightMode = createTheme({
+  palette: {
+    primary: {
+      main : "#76ff03"
+    }
   }
 });
 
@@ -28,7 +45,7 @@ const NavLinkComponent = ({ url, label, ...rest }) => {
   return (
         <NavLink to={url} {...rest}>
           {({ isActive }) => (
-            <ThemeProvider theme={isActive ? activeThemeWhenDarkMode : inactiveThemeWhenDarkMode}>
+            <ThemeProvider theme={isActive && isDarkTheme ? activeThemeWhenDarkMode : !isActive && isDarkTheme ? inactiveThemeWhenDarkMode : isActive && !isDarkTheme ? activeThemeWhenLightMode : inactiveThemeWhenLightMode}>
               <Typography
                 sx={{
                   my: 2,
