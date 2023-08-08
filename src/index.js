@@ -5,6 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 
+/* redux */
+import { Provider } from "react-redux";
+import store from "./store/bigPie";
+
 /* axios */
 import axios from "axios";
 
@@ -27,9 +31,11 @@ axios.interceptors.request.use((config) => {
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,18 +1,37 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import MuiNavbar from "./components/Navbar/Navbar";
+import MuiNavbar from "./components/Navbar/MuiNavbar";
 import {
   Container,
   CssBaseline,
+  ThemeProvider,
+  createTheme
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
 import Router from "./routes/Router";
 import LoadingAnimationComponent from "./components/LoadingAnimationComponent";
+import { useSelector } from "react-redux";
+
+const light = {
+  palette: {
+    mode: "light",
+  },
+};
+
+const dark = {
+  palette: {
+    mode: "dark",
+  },
+};
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+    const isDarkTheme = useSelector(
+    (bigPie) => bigPie.darkThemeSlice.isDarkTheme
+  );
 
   return (
+    <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
       <Container>
         <CssBaseline />
         <ToastContainer
@@ -33,6 +52,7 @@ function App() {
         <main>{isLoading ? <LoadingAnimationComponent /> : <Router />}</main>
         <footer></footer>
       </Container>
+    </ThemeProvider>
   );
 }
 

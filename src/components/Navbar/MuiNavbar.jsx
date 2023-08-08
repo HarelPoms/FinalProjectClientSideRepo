@@ -17,7 +17,7 @@ import { toast } from "react-toastify";
 
 import SearchPartial from "./SearchPartial";
 import ROUTES from "../../routes/ROUTES";
-// import { darkThemeActions } from "../../store/darkTheme";
+import { darkThemeActions } from "../../store/darkTheme";
 import NavbarMenuLinks from "./NavbarMenuLinks";
 import NavbarNotAuthLinks from "./NavbarNotAuthLinks";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
@@ -47,9 +47,9 @@ const MuiNavbar = () => {
     setAnchorElNav(null);
   };
 
-  // const changeTheme = () => {
-  //   dispatch(darkThemeActions.changeTheme());
-  // };
+  const changeTheme = () => {
+    dispatch(darkThemeActions.changeTheme());
+  };
 
   const logoClick = () => {
     navigate(ROUTES.HOME);
@@ -109,9 +109,9 @@ const MuiNavbar = () => {
               alignItems: 'center',
               flexWrap: 'wrap',
             }}>
-              {/* {isDarkTheme && isSearchUnfocused ? <DarkModeIcon onClick={changeTheme} /> :
+              {isDarkTheme && isSearchUnfocused ? <DarkModeIcon onClick={changeTheme} /> :
               isSearchUnfocused ?
-              <LightModeIcon onClick={changeTheme}/> : ""} */}
+              <LightModeIcon onClick={changeTheme}/> : ""}
               {isLoggedIn && isSearchUnfocused ? <NavProfileMenuComponent picSrc={avatarURL} /> : ""}
               {isSearchUnfocused && viewportSize !== "xs" && viewportSize !== "sm" ? <NavbarNotAuthLinks /> : ""}
             </Box>
