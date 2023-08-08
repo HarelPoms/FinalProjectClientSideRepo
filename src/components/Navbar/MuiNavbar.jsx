@@ -109,7 +109,6 @@ const MuiNavbar = () => {
               alignItems: 'center',
               flexWrap: 'wrap',
             }}>
-              {/* <Avatar alt="Profile Pic" src={avatarURL} /> */}
               {/* {isDarkTheme && isSearchUnfocused ? <DarkModeIcon onClick={changeTheme} /> :
               isSearchUnfocused ?
               <LightModeIcon onClick={changeTheme}/> : ""} */}

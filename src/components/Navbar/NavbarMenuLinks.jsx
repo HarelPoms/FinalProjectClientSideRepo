@@ -4,7 +4,6 @@ import { Fragment } from "react";
 
 import ROUTES from "../../routes/ROUTES";
 import NavbarNotAuthLinks from "./NavbarNotAuthLinks";
-import { Routes } from "react-router-dom";
 
 // access to all
 const pages = [
@@ -18,9 +17,10 @@ const pages = [
     }
 ];
 
-const patientPages = [
+const loggedInPatientPages = [
     {label: "Create prescription request", url: ROUTES.NEWPRESCRIPTION},
-    {label: "My Prescriptions",url: ROUTES.MYPRESCRIPTIONS}
+    {label: "My Prescriptions",url: ROUTES.MYPRESCRIPTIONS},
+    {label: "Favorite Medicines", url: ROUTES.MYFAVMEDICINES}
 ]
 //pharma pages
 const pharmaPages = [
@@ -32,7 +32,7 @@ const pharmaPages = [
 ];
 
 //doctor pages
-const doctorPages = [
+const loggedInDoctorPages = [
     {label: "Unassigned Prescriptions", url: ROUTES.PRESCRIPTIONS},
     {label: "My Prescriptions", url: ROUTES.MYPRESCRIPTIONS},
     {label: "My Patients", url: ROUTES.MYPATIENTS}
@@ -41,9 +41,6 @@ const doctorPages = [
 const adminPages = [
     
 ]
-
-const loggedInPages  = [{label: "Favorite Medicines", url: ROUTES.MYFAVMEDICINES}];
-
 const NavbarMenuLinks = ({isMobile}) => {
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
     const isLoggedIn = useSelector(
@@ -57,16 +54,15 @@ const NavbarMenuLinks = ({isMobile}) => {
         ))}
         {isMobile ? <NavbarNotAuthLinks /> : 
         ""}
+        {/* patient links who is logged in */}
+        {payload && !payload.isPharma && !payload.isDoctor && !payload.isAdmin ? loggedInPatientPages.map((page) => <NavLinkComponent key={page.url} {...page} />) : ""}
         {payload && payload.isPharma ? pharmaPages.map((page) => (
             <NavLinkComponent key={page.url} {...page} />
         )) : ""}
-        {payload && payload.isDoctor ? doctorPages.map((page) => (
+        {payload && payload.isDoctor ? loggedInDoctorPages.map((page) => (
             <NavLinkComponent key={page.url} {...page} />
         )) : ""}
         {payload && payload.isAdmin ? adminPages.map((page) => (
-            <NavLinkComponent key={page.url} {...page} />
-        )) : ""}
-        {isLoggedIn ? loggedInPages.map((page) => (
             <NavLinkComponent key={page.url} {...page} />
         )) : ""}
         </Fragment>
