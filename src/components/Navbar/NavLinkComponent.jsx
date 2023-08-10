@@ -1,9 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { blue, lightGreen } from '@mui/material/colors';
 import { useSelector } from "react-redux";
-
 
 const activeThemeWhenDarkMode = createTheme({
   palette: {
