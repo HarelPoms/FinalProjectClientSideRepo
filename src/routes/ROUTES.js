@@ -15,7 +15,8 @@ const ROUTES = {
   LOGIN: "/login",
   PROFILE: "/profile",
   LOGOUT: "/logout",
-  FULLDETAILS: "/full_details/:id",
+  FULLDETAILSMEDICINE: "/full_details_medicine/:id",
+  FULLDETAILSPRESCRIPTION: "/full_details_prescription/:id",
   ABOUT: "/about_us"
 };
 
