@@ -37,7 +37,8 @@ const registerSchema = Joi.object({
   [1,1,1])),
   zipCode: Joi.number().min(1).max(99999999).allow("").messages(generateMessages("Zip Code", [1,99999999], 1,
   [1,1,1])),
-  doctor: Joi.boolean()
+  isDoctor: Joi.boolean(),
+  HMO: Joi.string().required()
 });
 
 const validateRegisterSchema = (userInput) =>

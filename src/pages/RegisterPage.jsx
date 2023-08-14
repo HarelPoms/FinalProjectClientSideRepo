@@ -16,6 +16,7 @@ import ROUTES from "../routes/ROUTES";
 import InputComponent from "../components/InputComponent";
 import CancelButtonComponent from "../components/CancelButtonComponent";
 import RefreshButtonComponent from "../components/RefreshButtonComponent";
+import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
 import useResponsiveQueries from "../hooks/useResponsiveQueries";
 import { toast } from "react-toastify";
 import InputLabel from '@mui/material/InputLabel';
@@ -39,22 +40,22 @@ const RegisterPage = () => {
     street: "",
     houseNumber: "",
     zipCode: "",
-    hmo: "",
-    doctor: false
+    HMO: "",
+    isDoctor: false
   };
 
   const startingInputErrVal = {};
   const [inputState, setInputState] = useState(startingInputVal);
   const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
-  const [hmosState, setHmosState] = useState(null);
+  const [hmosState, setHmosState] = useState([]);
   const navigate = useNavigate();
+  const viewportSize = useResponsiveQueries();
 
   useEffect(() => {
       (async () => {
       try{
-        let allHmos = await axios.get("/hmos/");
+        let {data: allHmos} = await axios.get("/hmos/");
         setHmosState(allHmos);
-        console.log(allHmos);
       }
       catch(err){
           toast.error("Failed to get and set register hmos");
@@ -70,7 +71,24 @@ const RegisterPage = () => {
       if (joiResponse) {
         return;
       }
-      await axios.post("/users/register", inputState);
+      let inputStateToSend = JSON.parse(JSON.stringify(inputState));
+      inputStateToSend.name = {firstName : inputStateToSend.firstName, middleName: inputStateToSend.middleName, lastName: inputStateToSend.lastName};
+      delete inputStateToSend.firstName;
+      delete inputStateToSend.middleName;
+      delete inputStateToSend.lastName;
+      inputStateToSend.address = {country: inputStateToSend.country, state: inputStateToSend.state, city: inputStateToSend.city, street: inputStateToSend.street, houseNumber: inputStateToSend.houseNumber, zipCode: inputStateToSend.zipCode};
+      delete inputStateToSend.country;
+      delete inputStateToSend.state;
+      delete inputStateToSend.city;
+      delete inputStateToSend.street;
+      delete inputStateToSend.houseNumber;
+      delete inputStateToSend.zipCode;
+      inputStateToSend.image = {url: inputStateToSend.imageUrl, alt: inputStateToSend.imageAlt};
+      delete inputStateToSend.imageUrl;
+      delete inputStateToSend.imageAlt;
+      if(!inputStateToSend.image.url || inputStateToSend.image.url === "")
+      delete inputStateToSend.image;
+      await axios.post("/users/", inputStateToSend);
       navigate(ROUTES.LOGIN);
     } catch (err) {
         toast.error("Error trying to register user");
@@ -99,11 +117,15 @@ const RegisterPage = () => {
 
   const handleHMOInputChange = (ev) => {
     let newInputState = JSON.parse(JSON.stringify(inputState));
-    newInputState[ev.target.id] = ev.target.value;
+    newInputState.HMO = ev.target.value;
     setInputState(newInputState);
   };
+
+  if (!hmosState) {
+    return <LoadingAnimationComponent />;
+  }
   return (
-    <Container component="main" maxWidth={`${useResponsiveQueries()}`}>
+    <Container component="main" maxWidth={viewportSize}>
       <Box
         sx={{
           marginTop: 8,
@@ -128,8 +150,8 @@ const RegisterPage = () => {
             <InputComponent id="password" label="Password" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} inputType="password" />
             <InputComponent id="imageUrl" label="Image Url" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
             <InputComponent id="imageAlt" label="Image Alt" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
-            <InputComponent id="state" label="State" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
             <InputComponent id="country" label="Country" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
+            <InputComponent id="state" label="State" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
             <InputComponent id="city" label="City" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
             <InputComponent id="street" label="Street" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
             <InputComponent id="houseNumber" label="House Number" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
@@ -139,13 +161,13 @@ const RegisterPage = () => {
               <InputLabel id="selectHmo">HMO</InputLabel>
                 <Select
                   labelId="hmoLabel"
-                  id="hmoSelect"
-                  value={inputState.hmo}
+                  id="HMO"
+                  value={inputState.HMO}
                   label="HMO"
                   onChange={handleHMOInputChange}
                 >
                   {hmosState.map((hmo) => (
-                    <MenuItem value={hmo._id}>{hmo.name}</MenuItem>
+                    <MenuItem value={hmo._id} key={hmo._id + Date.now()}>{hmo.name}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -153,7 +175,7 @@ const RegisterPage = () => {
 
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox id="doctor" checked={inputState.doctor} onChange={handleCheckboxChange} color="primary" />}
+                control={<Checkbox id="doctor" checked={inputState.isDoctor} onChange={handleCheckboxChange} color="primary" />}
                 label="Register as Doctor"
               />
             </Grid>

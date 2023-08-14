@@ -1,8 +1,8 @@
 import Joi from "joi";
 
 import validation from "./validation";
-import generateMessages from "./msgGenerationUtil";
-import validateFieldFromSchema from "./validateFieldFromSchemaUtil"
+import generateMessages from "./utils/msgGenerationUtil";
+import validateFieldFromSchema from "./utils/validateFieldFromSchemaUtil"
 
 const loginSchema = Joi.object({
   email: Joi.string()

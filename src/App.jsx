@@ -8,6 +8,7 @@ import {
   createTheme
 } from "@mui/material";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Router from "./routes/Router";
 import LoadingAnimationComponent from "./components/LoadingAnimationComponent";
 import { useSelector } from "react-redux";
