@@ -2,7 +2,6 @@ import {
   Card,
   CardActionArea,
   CardMedia,
-  CardHeader,
   CardContent,
   Typography,
   CardActions,
@@ -20,7 +19,6 @@ import { useNavigate } from "react-router-dom";
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -47,7 +45,6 @@ const PrescriptionComponent = ({
     };
 
   const [prescriptionDetailsState, setPrescriptionState] = useState(prescriptionDetailsStartingVal);
-  const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
 
   const navigate = useNavigate();
 

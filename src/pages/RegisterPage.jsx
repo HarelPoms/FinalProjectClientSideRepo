@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -18,6 +18,10 @@ import CancelButtonComponent from "../components/CancelButtonComponent";
 import RefreshButtonComponent from "../components/RefreshButtonComponent";
 import useResponsiveQueries from "../hooks/useResponsiveQueries";
 import { toast } from "react-toastify";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 const RegisterPage = () => {
   const startingInputVal = {
@@ -35,13 +39,32 @@ const RegisterPage = () => {
     street: "",
     houseNumber: "",
     zipCode: "",
+    hmo: "",
     doctor: false
   };
 
   const startingInputErrVal = {};
   const [inputState, setInputState] = useState(startingInputVal);
   const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
+  const [hmosState, setHmosState] = useState();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+        try{
+          let allHmos = await axios.get("/hmos/");
+          setHmosState(allHmos);
+        }
+        catch(err){
+            toast.error("Failed to get and set register hmos");
+        }
+        })();
+        
+    }, []);
+
   const handleBtnClick = async (ev) => {
     try {
       const joiResponse = validateRegisterSchema(inputState);
@@ -75,6 +98,12 @@ const RegisterPage = () => {
     setInputState(startingInputVal);
     setInputsErrorsState(startingInputErrVal);
   }
+
+  const handleHMOInputChange = (ev) => {
+    let newInputState = JSON.parse(JSON.stringify(inputState));
+    newInputState[ev.target.id] = ev.target.value;
+    setInputState(newInputState);
+  };
   return (
     <Container component="main" maxWidth={`${useResponsiveQueries()}`}>
       <Box
@@ -107,6 +136,22 @@ const RegisterPage = () => {
             <InputComponent id="street" label="Street" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
             <InputComponent id="houseNumber" label="House Number" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
             <InputComponent id="zipCode" label="Zip Code" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
+            <Grid item xs={12}>
+              <FormControl fullWidth>
+              <InputLabel id="selectHmo">HMO</InputLabel>
+                <Select
+                  labelId="hmoLabel"
+                  id="hmoSelect"
+                  value={inputState.hmo}
+                  label="HMO"
+                  onChange={handleHMOInputChange}
+                >
+                  {hmosState.map((hmo) => (
+                    <MenuItem value={hmo._id}>{hmo.name}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
 
             <Grid item xs={12}>
               <FormControlLabel
