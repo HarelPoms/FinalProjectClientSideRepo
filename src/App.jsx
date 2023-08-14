@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 import Router from "./routes/Router";
 import LoadingAnimationComponent from "./components/LoadingAnimationComponent";
 import { useSelector } from "react-redux";
+import useLoggedIn from "./hooks/useLoggedIn";
 
 const light = {
   palette: {
@@ -25,10 +26,17 @@ const dark = {
 };
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const loggedIn = useLoggedIn();
     const isDarkTheme = useSelector(
     (bigPie) => bigPie.darkThemeSlice.isDarkTheme
   );
+  useEffect(() => {
+    (async () => {
+      await loggedIn();
+      setIsLoading(false);
+    })();
+  }, []);
 
   return (
     <ThemeProvider theme={isDarkTheme ? createTheme(dark) : createTheme(light)}>
