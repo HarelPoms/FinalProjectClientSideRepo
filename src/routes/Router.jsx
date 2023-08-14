@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
+import RegisterPage from "../pages/RegisterPage";
 import LogoutPage from "../pages/LogoutPage";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
@@ -8,6 +9,7 @@ const Router = () => {
   return (
     <Routes>
       <Route path={ROUTES.HOME} element={<HomePage />} />
+      <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route
         path={ROUTES.LOGOUT}
         element={<LoggedInRoute element={<LogoutPage />} />}

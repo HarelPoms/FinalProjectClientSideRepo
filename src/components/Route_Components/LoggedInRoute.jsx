@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-import ROUTES from "../routes/ROUTES";
+import ROUTES from "../../routes/ROUTES";
+//../routes/ROUTES
 
 const LoggedInRoute = ({ element }) => {
   //* logic section

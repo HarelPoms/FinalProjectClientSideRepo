@@ -104,7 +104,7 @@ const HomePage = () => {
       </Typography>
       <Typography variant="h2"> Medicines Page </Typography>
       <Typography variant="h3"> Here you can find medicines </Typography>
-      <Divider> Cards on display </Divider>
+      <Divider> Medicines on display </Divider>
       <Grid container spacing={2}>
         {medsArr.map((item) => (
           <Grid item xs={6} md={4} key={item._id + Date.now()}>

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-import ROUTES from "../routes/ROUTES";
+import ROUTES from "../../routes/ROUTES";
 import { toast } from "react-toastify";
 
 //isDocOrAdmin - False = regular, True = Doc/Admin

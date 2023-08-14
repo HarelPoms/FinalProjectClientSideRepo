@@ -46,24 +46,22 @@ const RegisterPage = () => {
   const startingInputErrVal = {};
   const [inputState, setInputState] = useState(startingInputVal);
   const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
-  const [hmosState, setHmosState] = useState();
+  const [hmosState, setHmosState] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    }, []);
-
-    useEffect(() => {
-        (async () => {
-        try{
-          let allHmos = await axios.get("/hmos/");
-          setHmosState(allHmos);
-        }
-        catch(err){
-            toast.error("Failed to get and set register hmos");
-        }
-        })();
-        
-    }, []);
+      (async () => {
+      try{
+        let allHmos = await axios.get("/hmos/");
+        setHmosState(allHmos);
+        console.log(allHmos);
+      }
+      catch(err){
+          toast.error("Failed to get and set register hmos");
+      }
+      })();
+      
+  }, []);
 
   const handleBtnClick = async (ev) => {
     try {
