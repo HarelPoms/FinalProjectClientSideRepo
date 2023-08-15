@@ -70,8 +70,8 @@ const MuiNavbar = () => {
         try{
             if(payload){
               const {data} = await axios.get("/users/" + payload._id);
-              if(data.imageUrl && data.imageUrl !== "" && checkValidURLImage(data.imageUrl)){
-                setAvatarURL(data.imageUrl);
+              if(data.image.url && data.image.url !== "" && checkValidURLImage(data.image.url)){
+                setAvatarURL(data.image.url);
               }
               else{
                 setAvatarURL(defaultAvatar);
