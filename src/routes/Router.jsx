@@ -6,6 +6,7 @@ import LoginPage from "../pages/LoginPage";
 import FavMedicinesPage from "../pages/FavMedicinesPage";
 import AboutPage from "../pages/AboutPage";
 import FullDetailsMedicinePage from "../pages/FullDetailsMedicinePage";
+import MyPrescriptionsPage from "../pages/MyPrescriptionsPage";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
 
@@ -15,6 +16,9 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTES.MYPRESCRIPTIONS} element={
+      <LoggedInRoute element={<MyPrescriptionsPage />} />
+      } />
       <Route path={ROUTES.MYFAVMEDICINES} element={
       <LoggedInRoute element={<FavMedicinesPage />} />
       } />

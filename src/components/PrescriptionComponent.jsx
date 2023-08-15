@@ -23,6 +23,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const PrescriptionComponent = ({
+  id,
   imgUrl,
   medicineList,
   patientId,
@@ -30,7 +31,6 @@ const PrescriptionComponent = ({
   hmoId,
   isActive,
   expiryDate,
-  id,
   onDelete,
   onEdit,
   canEdit,

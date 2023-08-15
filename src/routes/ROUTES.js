@@ -8,6 +8,8 @@ const ROUTES = {
   PRESCRIPTIONS: "/prescriptions",
   MYPRESCRIPTIONS: "/my_prescriptions",
   NEWPRESCRIPTION: "/new_prescription",
+  EDITPRESCRIPTION: "/edit_prescription/:id",
+  EDITMEDICINE: "/edit_medicine/:id",
   USERS: "/users",
   MYPATIENTS: "/my-patients",
   PHARMAS: "/pharmas",
