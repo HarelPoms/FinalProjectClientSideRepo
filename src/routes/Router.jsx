@@ -3,6 +3,8 @@ import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage";
 import LogoutPage from "../pages/LogoutPage";
 import LoginPage from "../pages/LoginPage";
+import FavMedicinesPage from "../pages/FavMedicinesPage";
+import AboutPage from "../pages/AboutPage";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
 
@@ -12,6 +14,10 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+      <Route path={ROUTES.MYFAVMEDICINES} element={
+      <LoggedInRoute element={<FavMedicinesPage />} />
+      } />
+      <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route
         path={ROUTES.LOGOUT}
         element={<LoggedInRoute element={<LogoutPage />} />}

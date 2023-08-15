@@ -19,11 +19,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const MedicineComponent = ({
+  id,
   img,
   title,
   subTitle,
   description,
-  id,
   onDelete,
   onEdit,
   onLike,
