@@ -79,9 +79,9 @@ const PrescriptionComponent = ({
         (async () => {
         try{
             let patientNameToSet = "", doctorNameToSet = "", hmoNameToSet = "";
-            let {data : patientData} = await axios.get("/users/" + patientId);
+            let {data : patientData} = await axios.get("/users/fullNameOfUser/" + patientId);
             if(doctorId){
-              let {data : doctorData} = await axios.get("/users/" + doctorId);
+              let {data : doctorData} = await axios.get("/users/fullNameOfUser/" + doctorId);
               doctorNameToSet = doctorData.name.firstName + " " + doctorData.name.lastName;
             }
             let {data : hmoData} = await axios.get("/hmos/" + hmoId);

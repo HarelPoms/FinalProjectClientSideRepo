@@ -39,7 +39,7 @@ const MyPrescriptionsPage = () => {
             when component loaded and states not loaded
         */
         setOriginalPrescriptionsArr(data);
-        setPrescriptionsArr(data.filter((prescription) => prescription.doctorId.startsWith(filter) || prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter)));
+        setPrescriptionsArr(data.filter((prescription) => prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter)));
         
         return;
         }
@@ -50,7 +50,7 @@ const MyPrescriptionsPage = () => {
        //need to think of how to relate word typed to id
         let newOriginalPrescriptionsArr = JSON.parse(JSON.stringify(originalPrescriptionsArr));
         setPrescriptionsArr(
-            newOriginalPrescriptionsArr.filter((prescription) => prescription.doctorId.startsWith(filter) || prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter))
+            newOriginalPrescriptionsArr.filter((prescription) => prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter))
         );
         }
     };
