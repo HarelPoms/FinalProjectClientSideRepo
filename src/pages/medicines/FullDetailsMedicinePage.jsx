@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MedicineDetailsComponent from "../components/MedicineDetailsComponent"
-import {validateEditMedicineParamsSchema} from "../validation/medicineEditValidation";
-import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
+import MedicineDetailsComponent from "../../components/MedicineDetailsComponent"
+import {validateEditMedicineParamsSchema} from "../../validation/medicineEditValidation";
+import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import { toast } from "react-toastify";
 
 const FullDetailsMedicinePage = () => {

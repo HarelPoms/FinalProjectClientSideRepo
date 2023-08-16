@@ -30,7 +30,8 @@ const PrescriptionComponent = ({
   patientId,
   doctorId,
   hmoId,
-  isActivePrescription,
+  isActive,
+  isApproved,
   expiryDate,
   onDelete,
   onEdit,
@@ -79,10 +80,12 @@ const PrescriptionComponent = ({
         try{
             let patientNameToSet = "", doctorNameToSet = "", hmoNameToSet = "";
             let {data : patientData} = await axios.get("/users/" + patientId);
-            let {data : doctorData} = await axios.get("/users/" + doctorId);
+            if(doctorId){
+              let {data : doctorData} = await axios.get("/users/" + doctorId);
+              doctorNameToSet = doctorData.name.firstName + " " + doctorData.name.lastName;
+            }
             let {data : hmoData} = await axios.get("/hmos/" + hmoId);
             patientNameToSet = patientData.name.firstName + " " + patientData.name.lastName;
-            doctorNameToSet = doctorData.name.firstName + " " + doctorData.name.lastName;
             hmoNameToSet = hmoData.name;
             let newInputState = JSON.parse(JSON.stringify(prescriptionDetailsState));
             newInputState["doctorName"] =   doctorNameToSet;
@@ -108,7 +111,8 @@ const PrescriptionComponent = ({
         <Typography>Doctor Name : {prescriptionDetailsState.doctorName}</Typography>
         <Typography>HMO Name : {prescriptionDetailsState.hmoName}</Typography>
         <Typography>Expiry Date : {formatDate(expiryDate)}</Typography>
-        <Typography>Is valid : {formatIsAvailable(isActivePrescription)}</Typography>
+        <Typography>Is valid : {formatIsAvailable(isActive)}</Typography>
+        <Typography>Is Approved: {formatIsAvailable(isApproved)}</Typography>
         <List>
               {prescriptionDetailsState.medicineList.map((item) => (
                   <ListItem disablePadding key={item._id + Date.now()}>
@@ -116,7 +120,7 @@ const PrescriptionComponent = ({
                           <ListItemIcon>
                               <MedicationIcon />
                           </ListItemIcon>
-                          <ListItemText primary={`Medicine : ${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
+                          <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
                       </ListItemButton>
                   </ListItem>
               ))}

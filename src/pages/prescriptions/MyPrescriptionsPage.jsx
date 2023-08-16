@@ -1,14 +1,14 @@
 import { Box, Grid, Typography } from "@mui/material";
-import PrescriptionComponent from "../components/PrescriptionComponent";
+import PrescriptionComponent from "../../components/PrescriptionComponent";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useQueryParams from "../hooks/useQueryParams";
+import useQueryParams from "../../hooks/useQueryParams";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Divider from '@mui/material/Divider';
-import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
-import isImage from "../validation/isImgUrlValid";
+import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
+import isImage from "../../validation/isImgUrlValid";
 
 const MyPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);
@@ -94,7 +94,8 @@ const MyPrescriptionsPage = () => {
                 patientId={item.patientId}
                 doctorId={item.doctorId}
                 hmoId={item.HMO}
-                isActivePrescription={item.isActive}
+                isActive={item.isActive}
+                isApproved={item.isApproved}
                 expiryDate={item.expiryDate}
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}

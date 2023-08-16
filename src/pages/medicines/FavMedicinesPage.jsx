@@ -1,14 +1,14 @@
 import { Box, Grid, Typography } from "@mui/material";
-import MedicineComponent from "../components/MedicineComponent";
+import MedicineComponent from "../../components/MedicineComponent";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useQueryParams from "../hooks/useQueryParams";
+import useQueryParams from "../../hooks/useQueryParams";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Divider from '@mui/material/Divider';
-import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
-import isImage from "../validation/isImgUrlValid";
+import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
+import isImage from "../../validation/isImgUrlValid";
 
 const FavMedicinesPage = () => {
     const [originalMedsArr, setOriginalMedsArr] = useState(null);

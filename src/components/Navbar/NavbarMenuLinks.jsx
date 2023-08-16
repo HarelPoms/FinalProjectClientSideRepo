@@ -33,7 +33,7 @@ const pharmaPages = [
 
 //doctor pages
 const loggedInDoctorPages = [
-    {label: "Unassigned Prescriptions", url: ROUTES.PRESCRIPTIONS},
+    {label: "Unassigned Prescriptions", url: ROUTES.UNASSIGNEDPRESCRIPTIONS},
     {label: "My Prescriptions", url: ROUTES.MYPRESCRIPTIONS},
     {label: "My Patients", url: ROUTES.MYPATIENTS}
 ]

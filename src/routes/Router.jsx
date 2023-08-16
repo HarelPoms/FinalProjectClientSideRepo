@@ -3,10 +3,11 @@ import HomePage from "../pages/HomePage";
 import RegisterPage from "../pages/RegisterPage";
 import LogoutPage from "../pages/LogoutPage";
 import LoginPage from "../pages/LoginPage";
-import FavMedicinesPage from "../pages/FavMedicinesPage";
+import FavMedicinesPage from "../pages/medicines/FavMedicinesPage";
 import AboutPage from "../pages/AboutPage";
-import FullDetailsMedicinePage from "../pages/FullDetailsMedicinePage";
-import MyPrescriptionsPage from "../pages/MyPrescriptionsPage";
+import FullDetailsMedicinePage from "../pages/medicines/FullDetailsMedicinePage";
+import MyPrescriptionsPage from "../pages/prescriptions/MyPrescriptionsPage";
+import UnassignedPrescriptionsPage from "../pages/prescriptions/UnassignedPrescriptionsPage";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
 
@@ -18,6 +19,9 @@ const Router = () => {
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.MYPRESCRIPTIONS} element={
       <LoggedInRoute element={<MyPrescriptionsPage />} />
+      } />
+      <Route path={ROUTES.UNASSIGNEDPRESCRIPTIONS} element={
+      <LoggedInRoute element={<UnassignedPrescriptionsPage />} />
       } />
       <Route path={ROUTES.MYFAVMEDICINES} element={
       <LoggedInRoute element={<FavMedicinesPage />} />

@@ -11,10 +11,9 @@ import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
-import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import LocalPharmacyIcon from '@mui/icons-material/LocalPharmacy';
 import axios from "axios";
 import { toast } from "react-toastify";
-
 import SearchPartial from "./SearchPartial";
 import ROUTES from "../../routes/ROUTES";
 import { darkThemeActions } from "../../store/darkTheme";
@@ -90,7 +89,7 @@ const MuiNavbar = () => {
       <Container maxWidth="xl">
         <Toolbar>
           <Box onClick={logoClick} sx={{ display: { xs: "none", md: "inline" } }}>
-            <CameraAltIcon />
+            <LocalPharmacyIcon />
           </Box>
           
           {/* main navbar */}

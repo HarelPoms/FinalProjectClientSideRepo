@@ -6,6 +6,7 @@ const ROUTES = {
   MYMEDICINES: "/my_medicines",
   DOCTORS: "/doctors",
   PRESCRIPTIONS: "/prescriptions",
+  UNASSIGNEDPRESCRIPTIONS: "/unassigned_prescriptions",
   MYPRESCRIPTIONS: "/my_prescriptions",
   NEWPRESCRIPTION: "/new_prescription",
   EDITPRESCRIPTION: "/edit_prescription/:id",
