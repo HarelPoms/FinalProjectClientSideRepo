@@ -81,7 +81,7 @@ const MyPrescriptionsPage = () => {
     }
     return (
         <Box>
-        <Typography variant="h1"> Unassigned Prescriptions Page </Typography>
+        <Typography variant="h1"> Unassigned Prescriptions </Typography>
         {prescriptionsArr && prescriptionsArr.length === 0 && <Divider> No Unassigned Prescriptions </Divider>}
         {prescriptionsArr && prescriptionsArr.length > 0 && <Divider> All Unassigned Prescriptions </Divider>}
         <Grid container spacing={2}>
