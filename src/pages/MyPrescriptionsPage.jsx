@@ -23,7 +23,7 @@ const MyPrescriptionsPage = () => {
             filterFunc(data);
         })
         .catch((err) => {
-            toast.error("Failed to retrieve buisiness cards data");
+            toast.error("Failed to retrieve my prescriptions data");
         });
     }, []);
     const filterFunc = (data) => {
@@ -93,13 +93,13 @@ const MyPrescriptionsPage = () => {
                 medicineList={item.medicineList}
                 patientId={item.patientId}
                 doctorId={item.doctorId}
-                hmoId={item.hmoId}
-                isActive={item.isActive}
+                hmoId={item.HMO}
+                isActivePrescription={item.isActive}
                 expiryDate={item.expiryDate}
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}
-                canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.user_id == payload._id }
-                canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.user_id == payload._id))}
+                canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
+                canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
                 /> 
             </Grid>
             ))}

@@ -13,6 +13,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
+import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
@@ -29,14 +30,13 @@ const PrescriptionComponent = ({
   patientId,
   doctorId,
   hmoId,
-  isActive,
+  isActivePrescription,
   expiryDate,
   onDelete,
   onEdit,
   canEdit,
   canDelete,
 }) => {
-
   const prescriptionDetailsStartingVal = {
         doctorName : "",
         patientName : "",
@@ -47,6 +47,21 @@ const PrescriptionComponent = ({
   const [prescriptionDetailsState, setPrescriptionState] = useState(prescriptionDetailsStartingVal);
 
   const navigate = useNavigate();
+
+  const formatDate = (d) => 
+  {
+    let date = new Date(d)
+    var dd = date.getDate(); 
+    var mm = date.getMonth()+1;
+    var yyyy = date.getFullYear(); 
+    if(dd<10){dd='0'+dd} 
+    if(mm<10){mm='0'+mm};
+    return d = dd+'/'+mm+'/'+yyyy
+  }
+
+  const formatIsAvailable = (validBool) => {
+    return validBool ? "Yes" : "No";
+  }
 
   const handleDeleteBtnClick = () => {
     onDelete(id);
@@ -66,8 +81,8 @@ const PrescriptionComponent = ({
             let {data : patientData} = await axios.get("/users/" + patientId);
             let {data : doctorData} = await axios.get("/users/" + doctorId);
             let {data : hmoData} = await axios.get("/hmos/" + hmoId);
-            patientNameToSet = patientData.name.first + " " + patientData.name.last;
-            doctorNameToSet = doctorData.name.first + " " + doctorData.name.last;
+            patientNameToSet = patientData.name.firstName + " " + patientData.name.lastName;
+            doctorNameToSet = doctorData.name.firstName + " " + doctorData.name.lastName;
             hmoNameToSet = hmoData.name;
             let newInputState = JSON.parse(JSON.stringify(prescriptionDetailsState));
             newInputState["doctorName"] =   doctorNameToSet;
@@ -90,22 +105,22 @@ const PrescriptionComponent = ({
       </CardActionArea>
       <CardContent>
         <Typography>Patient Name : {prescriptionDetailsState.patientName}</Typography>
-          <Typography>Doctor Name : {prescriptionDetailsState.doctorName}</Typography>
-          <Typography>HMO Name : {prescriptionDetailsState.hmoName}</Typography>
-          <Typography>Expiry Date : {expiryDate}</Typography>
-          <Typography>Is valid : {isActive}</Typography>
-          <List>
-                {prescriptionDetailsState.medicineList.map((item) => (
-                    <ListItem disablePadding key={item._id + Date.now()}>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                <MedicationIcon />
-                            </ListItemIcon>
-                            <ListItemText primary={`Medicine : ${item.medicineName} Qty : ${item.medicineUnits} Is Available : ${item.isActive}`} />
-                        </ListItemButton>
-                    </ListItem>
-                ))}
-            </List>
+        <Typography>Doctor Name : {prescriptionDetailsState.doctorName}</Typography>
+        <Typography>HMO Name : {prescriptionDetailsState.hmoName}</Typography>
+        <Typography>Expiry Date : {formatDate(expiryDate)}</Typography>
+        <Typography>Is valid : {formatIsAvailable(isActivePrescription)}</Typography>
+        <List>
+              {prescriptionDetailsState.medicineList.map((item) => (
+                  <ListItem disablePadding key={item._id + Date.now()}>
+                      <ListItemButton>
+                          <ListItemIcon>
+                              <MedicationIcon />
+                          </ListItemIcon>
+                          <ListItemText primary={`Medicine : ${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
+                      </ListItemButton>
+                  </ListItem>
+              ))}
+          </List>
       </CardContent>
       <CardActions>
         {canEdit ? (
