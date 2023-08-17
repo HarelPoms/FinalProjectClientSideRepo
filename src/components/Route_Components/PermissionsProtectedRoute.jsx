@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 //isDocOrAdmin - False = regular, True = Doc/Admin
 //Will have to add consideration for pharmas
-const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isBizOrAdmin }) => {
+const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin }) => {
   //* logic section
   const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
   const payload = useSelector((bigState) => bigState.authSlice.payload);
@@ -19,10 +19,10 @@ const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isBizOrAdmin }) =>
   }
   //* html section
   if (isLoggedIn) {
-    if(isBizOrAdmin && adminOrDocCheck()){
+    if(isDocOrAdmin && adminOrDocCheck()){
       return element;
     }
-    else if (!isBizOrAdmin && regularUserCheck()){
+    else if (!isDocOrAdmin && regularUserCheck()){
       return element;
     }
   }
@@ -34,13 +34,13 @@ const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isBizOrAdmin }) =>
 PermissionsProtectedRoute.propTypes = {
     element: PropTypes.element.isRequired,
     isAdmin: PropTypes.bool.isRequired,
-    isBiz:   PropTypes.bool.isRequired,
-    isBizOrAdmin: PropTypes.bool.isRequired,
+    isDoc:   PropTypes.bool.isRequired,
+    isDocOrAdmin: PropTypes.bool.isRequired,
 };
 
 PermissionsProtectedRoute.defaultProps = {
     isAdmin: false,
-    isBiz: false,
-    isBizOrAdmin: false
+    isDoc: false,
+    isDocOrAdmin: false
 };
 export default PermissionsProtectedRoute;

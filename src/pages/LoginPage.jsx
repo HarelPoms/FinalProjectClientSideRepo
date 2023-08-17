@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -31,6 +31,10 @@ const LoginPage = () => {
   const loggedIn = useLoggedIn();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setIsPharmaState((newIsPharmaState) => newIsPharmaState);
+  }, [isPharmaState]);
+
   const handleBtnClick = async (ev) => {
     try {
       const joiResponse = validateLoginSchema(inputState);
@@ -38,12 +42,12 @@ const LoginPage = () => {
       if (joiResponse) {
         return;
       }
-      if(!isPharmaState){
-        const { data } = await axios.post("/users/login", inputState);
+      if(isPharmaState){
+        const { data } = await axios.post("/pharmas/login", inputState);
         localStorage.setItem("token", data.token);
       }
       else{
-        const { data } = await axios.post("/pharmas/login", inputState);
+        const { data } = await axios.post("/users/login", inputState);
         localStorage.setItem("token", data.token);
       }
       
@@ -56,6 +60,7 @@ const LoginPage = () => {
   };
   const handleCheckboxChange = (ev) => {
     setIsPharmaState(ev.target.checked);
+    console.log(isPharmaState);
   };
   const handleInputChange = (ev) => {
     let newInputState = JSON.parse(JSON.stringify(inputState));
@@ -78,6 +83,7 @@ const LoginPage = () => {
     setInputsErrorsState(startingInputErrVal);
     setIsPharmaState(false);
   }
+
   return (
     <Container component="main" maxWidth={`${useResponsiveQueries()}`}>
       <Box
