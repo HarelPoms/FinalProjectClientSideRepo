@@ -9,6 +9,7 @@ import FullDetailsMedicinePage from "../pages/medicines/FullDetailsMedicinePage"
 import MyPrescriptionsPage from "../pages/prescriptions/MyPrescriptionsPage";
 import UnassignedPrescriptionsPage from "../pages/prescriptions/UnassignedPrescriptionsPage";
 import NewMedicinePage from "../pages/medicines/NewMedicinePage";
+//import MyMedicinesPage from "../pages/medicines/my"
 import PermissionsProtectedRoute from "../components/Route_Components/PermissionsProtectedRoute";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";

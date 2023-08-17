@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import MedicineComponent from "../../components/MedicineComponent";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -6,51 +6,51 @@ import { useNavigate } from "react-router-dom";
 import useQueryParams from "../../hooks/useQueryParams";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Divider from '@mui/material/Divider';
+import Button from "@mui/material/Button";
+import AddIcon from '@mui/icons-material/Add';
+import ROUTES from "../../routes/ROUTES";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
 
-const FavMedicinesPage = () => {
-    const [originalMedsArr, setOriginalMedsArr] = useState(null);
-    const [medsArr, setMedsArr] = useState(null);
+const MyCardsPage = () => {
+    const [originalMyMedsArr, setOriginalMyMedsArr] = useState(null);
+    const [myMedsArr, setMyMedsArr] = useState(null);
     const navigate = useNavigate();
     let qparams = useQueryParams();
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
     useEffect(() => {
-        axios.get("/medicines/my-fav-meds")
+        axios.get("/pharmas/my-medicines")
         .then(({ data }) => {
             filterFunc(data);
         })
         .catch((err) => {
-            toast.error("Failed to retrieve medicines data");
+            toast.error("Failed to retrieve this pharmas medicines");
         });
     }, []);
     const filterFunc = (data) => {
-        if (!originalMedsArr && !data) {
+        if (!originalMyMedsArr && !data) {
         return;
         }
         let filter = "";
         if (qparams.filter) {
         filter = qparams.filter;
         }
-        if (!originalMedsArr && data) {
+        if (!originalMyMedsArr && data) {
         /*
             when component loaded and states not loaded
         */
-        //let favData = data.filter((card) => card.likes.includes(payload._id));
-        setOriginalMedsArr(data);
-        setMedsArr(data.filter((medicine) => medicine.title.startsWith(filter) || medicine.medicineNumber.startsWith(filter)));
-        
+        setOriginalMyMedsArr(data);
+        setMyMedsArr(data.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter)));
         return;
         }
-        if (originalMedsArr) {
+        if (originalMyMedsArr) {
         /*
             when all loaded and states loaded
         */
-        let newOriginalMedicinesArr = JSON.parse(JSON.stringify(originalMedsArr));
-        setMedsArr(
-            newOriginalMedicinesArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
+        let newOriginalMyMedsArr = JSON.parse(JSON.stringify(originalMyMedsArr));
+        setMyMedsArr(
+            newOriginalMyMedsArr.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter))
         );
         }
     };
@@ -61,18 +61,18 @@ const FavMedicinesPage = () => {
         try {
         let response = await axios.delete("/medicines/" + id);
         if(response.status === 200){
-            setMedsArr((newMedsArr) => newMedsArr.filter((item) => item._id != id));
+            setMyMedsArr((newMedsArr) => newMedsArr.filter((item) => item._id != id));
             toast.success("Medicine deletion successful");
         }
         else{
             toast.error("Medicine Deletion Failed");
         }
         } catch (err) {
-            toast.error("Error when deleting");
+            toast.error("Medicine Deletion Server error");
         }
     };
     const handleEditFromInitialMedicinesArr = (id) => {
-        navigate(`/edit/${id}`); //localhost:3000/edit/123213
+        navigate(`/edit_medicine/${id}`);
     };
 
     const handleLikeFromMedicines = async (id) => {
@@ -87,24 +87,22 @@ const FavMedicinesPage = () => {
     const handleDislikeFromMedicines = async (id) => {
         try {
             await axios.patch("/medicines/"+ id);
-            setMedsArr((newCardsArr) => newCardsArr.filter((card) => card._id != id));
             toast.success("Removed from Favorites");
         } catch(err){
-            toast.error("Failed to remove card from favorites");
+            toast.error("Failed to remove medicine from favorites");
         }
+    }
+    const handleCreateClick = () => {
+        navigate(ROUTES.NEWMEDICINE);
     } 
 
-    if (!medsArr) {
+    if (!myMedsArr) {
         return <LoadingAnimationComponent />;
     }
     return (
         <Box>
-        <Typography variant="h1"> My Favorite Cards Page </Typography>
-        <Typography variant="h3"> Cards I've favorited </Typography>
-        {medsArr && medsArr.length === 0 && <Divider> You have no favorite medicines </Divider>}
-        {medsArr && medsArr.length > 0 && <Divider> My Favorited Medicines </Divider>}
         <Grid container spacing={2}>
-            {medsArr.map((item) => (
+            {myMedsArr.map((item) => (
             <Grid item xs={6} md={4} key={item._id + Date.now()}>
                 <MedicineComponent
                 id={item._id}
@@ -120,13 +118,19 @@ const FavMedicinesPage = () => {
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.user_id == payload._id))}
                 canLike={payload && !item.likes.includes(payload._id)}
                 isOwnedBySelf={item.user_id === payload._id}
-                /> 
+                />
             </Grid>
             ))}
+            <Grid item xs={10}></Grid>
+            <Grid item xs={2} >
+                <Button variant="contained" color="success" sx={ { borderRadius: 18 } } onClick={handleCreateClick}>
+                    <AddIcon />
+                </Button>
+            </Grid>
         </Grid>
         </Box>
     );
 };
 
 
-export default FavMedicinesPage;
+export default MyCardsPage;

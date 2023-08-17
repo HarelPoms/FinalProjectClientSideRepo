@@ -113,15 +113,15 @@ const HomePage = () => {
               title={item.title}
               subTitle={item.subTitle}
               description={item.description}
-              img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderCardImg.png"}
+              img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}
               onDelete={handleDeleteFromInitialCardsArr}
               onEdit={handleEditFromInitialMedicineArr}
               onLike={handleLikeFromMedicines}
               onDislike={handleDislikeFromMedicines}
-              canEdit={payload && (payload.doctor || payload.isAdmin) && item.user_id == payload._id }
-              canDelete={payload && (payload.isAdmin || (payload.doctor && item.user_id == payload._id))}
+              canEdit={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id)) }
+              canDelete={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id))}
               canLike={payload && !item.likes.includes(payload._id)}
-              isOwnedBySelf={payload && item.user_id === payload._id}
+              isOwnedBySelf={payload && item.pharma_id === payload._id}
             />
           </Grid>
         ))}
