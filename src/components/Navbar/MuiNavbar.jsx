@@ -64,11 +64,27 @@ const MuiNavbar = () => {
     return(suffixes.includes(splitUrl[splitUrl.length-1]));
   }
 
+  const getUserData = async (id) => {
+    let {data} = await axios.get("/users/" + id);
+    return {data: data};
+  }
+
+const getPharmaData = async (id) => {
+  let {data} = await axios.get("/pharmas/" + id);
+  return {data: data};
+}
+
   useEffect(() => {
         (async () => {
         try{
             if(payload){
-              const {data} = await axios.get("/users/" + payload._id);
+              let data;
+              if(payload.isPharma){
+                ({data} = await getPharmaData(payload._id));
+              }
+              else{
+                ({data} = await getUserData(payload._id));
+              }
               if(data.image.url && data.image.url !== "" && checkValidURLImage(data.image.url)){
                 setAvatarURL(data.image.url);
               }

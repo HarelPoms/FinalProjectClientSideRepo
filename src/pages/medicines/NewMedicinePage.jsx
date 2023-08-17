@@ -12,17 +12,18 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import isImage from "../../validation/isImgUrlValid";
+//import { useSelector } from "react-redux";
 
 import ROUTES from "../../routes/ROUTES";
 import validateMedicineEditSchema, {
     validateEditMedicineFieldFromSchema
 } from "../../validation/medicineEditValidation";
 
-import InputComponent from "../components/InputComponent";
-import CancelButtonComponent from "../components/CancelButtonComponent";
-import RefreshButtonComponent from "../components/RefreshButtonComponent";
-import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
-import useResponsiveQueries from "../hooks/useResponsiveQueries";
+import InputComponent from "../../components/InputComponent";
+import CancelButtonComponent from "../../components/CancelButtonComponent";
+import RefreshButtonComponent from "../../components/RefreshButtonComponent";
+import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
+import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewCardPage = () => {
     const startingInputVal = {title: "", subTitle: "", description: "", url: "", alt: "", prescription_required: false };
@@ -31,10 +32,14 @@ const NewCardPage = () => {
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
+    //const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
+    const convertToBool = (targetValue) => {
+        return targetValue == 'on' ? true : false;
+    }
     const handleCheckboxChange = (ev) => {
         let newInputState = JSON.parse(JSON.stringify(inputState));
-        newInputState[ev.target.id] = ev.target.value;
+        newInputState[ev.target.id] = convertToBool(ev.target.value);
         setInputState(newInputState);
     };
     const handleRefreshClick = (ev) => {
@@ -47,9 +52,14 @@ const NewCardPage = () => {
             try{
                 const joiResponse = validateMedicineEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
-
+                console.log(joiResponse);
                 if (!joiResponse) {
-                    await axios.post("/medicines/", inputState);
+                    let inputStateToSend = JSON.parse(JSON.stringify(inputState));
+                    inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
+                    delete inputStateToSend.url;
+                    delete inputStateToSend.alt;
+                    console.log(inputStateToSend);
+                    await axios.post("/medicines/", inputStateToSend);
                     toast.success("Succeeded to save new medicine");
                     //move to homepage
                     navigate(ROUTES.HOME);
@@ -106,7 +116,7 @@ const NewCardPage = () => {
                 maxWidth: { xs: 350, md: 250 },
             }}
             alt={inputState.alt ? inputState.alt : ""}
-            src={isImage(inputState.url) ? inputState.url : "/assets/images/placeholderCardImg.png"}
+            src={isImage(inputState.url) ? inputState.url : "/assets/images/placeholderMedicineImg.jpg"}
             />
             <Box component="div" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>

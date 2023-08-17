@@ -7,22 +7,28 @@ import { toast } from "react-toastify";
 
 //isDocOrAdmin - False = regular, True = Doc/Admin
 //Will have to add consideration for pharmas
-const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin }) => {
+const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin, isPharma }) => {
   //* logic section
   const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
   const payload = useSelector((bigState) => bigState.authSlice.payload);
   const adminOrDocCheck = () =>{
     return (payload && payload.isAdmin && isAdmin) || (payload && payload.isDoc && isDoc);
   }
-  const regularUserCheck = () => {
-    return (payload && payload.isAdmin === isAdmin) || (payload && payload.isDoc === isDoc);
+  const patientUserCheck = () => {
+    return (payload && payload.isAdmin === isAdmin) && (payload && payload.isDoc === isDoc) && (payload && payload.isPharma === isPharma);
+  }
+  const pharmaUserCheck = () => {
+    return (payload && payload.isPharma === isPharma)
   }
   //* html section
   if (isLoggedIn) {
     if(isDocOrAdmin && adminOrDocCheck()){
       return element;
     }
-    else if (!isDocOrAdmin && regularUserCheck()){
+    else if (!isDocOrAdmin && patientUserCheck()){
+      return element;
+    }
+    else if(isPharma && pharmaUserCheck()){
       return element;
     }
   }

@@ -8,6 +8,8 @@ import AboutPage from "../pages/AboutPage";
 import FullDetailsMedicinePage from "../pages/medicines/FullDetailsMedicinePage";
 import MyPrescriptionsPage from "../pages/prescriptions/MyPrescriptionsPage";
 import UnassignedPrescriptionsPage from "../pages/prescriptions/UnassignedPrescriptionsPage";
+import NewMedicinePage from "../pages/medicines/NewMedicinePage";
+import PermissionsProtectedRoute from "../components/Route_Components/PermissionsProtectedRoute";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
 
@@ -27,6 +29,7 @@ const Router = () => {
       <LoggedInRoute element={<FavMedicinesPage />} />
       } />
       <Route path={ROUTES.FULLDETAILSMEDICINE} element={<FullDetailsMedicinePage />} />
+      <Route path={ROUTES.NEWMEDICINE} element={<PermissionsProtectedRoute isAdmin={true} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<NewMedicinePage />} />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route
         path={ROUTES.LOGOUT}
