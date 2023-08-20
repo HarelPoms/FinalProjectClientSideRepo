@@ -24,7 +24,7 @@ const loggedInPatientPages = [
 ]
 //pharma pages
 const pharmaPages = [
-    {label: "Create", url:ROUTES.NEWMEDICINE},
+    {label: "Register New Medicine", url:ROUTES.NEWMEDICINE},
     {
         label: "My Medicines",
         url: ROUTES.MYMEDICINES

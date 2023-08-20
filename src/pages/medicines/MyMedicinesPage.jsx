@@ -117,7 +117,7 @@ const MyCardsPage = () => {
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.user_id == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.user_id == payload._id))}
                 canLike={payload && !item.likes.includes(payload._id)}
-                isOwnedBySelf={item.user_id === payload._id}
+                isOwnedBySelf={item.pharma_id === payload._id}
                 />
             </Grid>
             ))}

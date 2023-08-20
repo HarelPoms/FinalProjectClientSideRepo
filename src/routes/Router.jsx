@@ -9,7 +9,7 @@ import FullDetailsMedicinePage from "../pages/medicines/FullDetailsMedicinePage"
 import MyPrescriptionsPage from "../pages/prescriptions/MyPrescriptionsPage";
 import UnassignedPrescriptionsPage from "../pages/prescriptions/UnassignedPrescriptionsPage";
 import NewMedicinePage from "../pages/medicines/NewMedicinePage";
-//import MyMedicinesPage from "../pages/medicines/my"
+import MyMedicinesPage from "../pages/medicines/MyMedicinesPage";
 import PermissionsProtectedRoute from "../components/Route_Components/PermissionsProtectedRoute";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
 import ROUTES from "./ROUTES";
@@ -31,6 +31,7 @@ const Router = () => {
       } />
       <Route path={ROUTES.FULLDETAILSMEDICINE} element={<FullDetailsMedicinePage />} />
       <Route path={ROUTES.NEWMEDICINE} element={<PermissionsProtectedRoute isAdmin={true} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<NewMedicinePage />} />} />
+      <Route path={ROUTES.MYMEDICINES} element={<PermissionsProtectedRoute isAdmin={false} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<MyMedicinesPage />} />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
       <Route
         path={ROUTES.LOGOUT}

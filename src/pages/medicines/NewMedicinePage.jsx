@@ -58,7 +58,6 @@ const NewCardPage = () => {
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
                     delete inputStateToSend.url;
                     delete inputStateToSend.alt;
-                    console.log(inputStateToSend);
                     await axios.post("/medicines/", inputStateToSend);
                     toast.success("Succeeded to save new medicine");
                     //move to homepage
@@ -95,10 +94,10 @@ const NewCardPage = () => {
     <Container component="main" maxWidth={querySize}>
         <Box
             sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
             }}
         >
             <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -126,10 +125,10 @@ const NewCardPage = () => {
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <Grid item xs={12}>
-                <FormControlLabel
-                    control={<Checkbox id="prescription_required" checked={inputState.prescription_required} onChange={handleCheckboxChange} color="primary" />}
-                    label="Prescription Required"
-                />
+                    <FormControlLabel
+                        control={<Checkbox id="prescription_required" checked={inputState.prescription_required} onChange={handleCheckboxChange} color="primary" />}
+                        label="Prescription Required"
+                    />
                 </Grid>
 
                 <Grid item xs={6}>

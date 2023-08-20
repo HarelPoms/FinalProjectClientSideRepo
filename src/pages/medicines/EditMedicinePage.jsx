@@ -84,7 +84,11 @@ const EditMedicinePage = () => {
       const joiResponse = validateMedicineEditSchema(inputState);
       setInputsErrorsState(joiResponse);
       if (!joiResponse) {
-        await axios.put("/medicines/" + id, inputState);
+        let inputStateToSend = JSON.parse(JSON.stringify(inputState));
+        inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
+        delete inputStateToSend.url;
+        delete inputStateToSend.alt;
+        await axios.put("/medicines/" + id, inputStateToSend);
         setTimeout(toast.success("Edit Saved Succesfully"),3000);
         navigate(ROUTES.HOME);
       }
