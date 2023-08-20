@@ -114,8 +114,8 @@ const MyCardsPage = () => {
                 onEdit={handleEditFromInitialMedicinesArr}
                 onLike={handleLikeFromMedicines}
                 onDislike={handleDislikeFromMedicines}
-                canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.user_id == payload._id }
-                canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.user_id == payload._id))}
+                canEdit={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id ))}
+                canDelete={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id))}
                 canLike={payload && !item.likes.includes(payload._id)}
                 isOwnedBySelf={item.pharma_id === payload._id}
                 />

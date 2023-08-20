@@ -11,12 +11,13 @@ import Checkbox from "@mui/material/Checkbox";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
+import convertToBool from "../../services/convertToBoolUtil";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import ROUTES from "../../routes/ROUTES";
 import validateMedicineEditSchema, {
   validateEditMedicineParamsSchema, validateEditMedicineFieldFromSchema
 } from "../../validation/medicineEditValidation";
-import atom from "../logo.svg";
+import atom from "../../logo.svg";
 import { toast } from "react-toastify";
 import InputComponent from "../../components/InputComponent";
 import CancelButtonComponent from "../../components/CancelButtonComponent";
@@ -76,7 +77,7 @@ const EditMedicinePage = () => {
   }, [id]);
   const handleCheckboxChange = (ev) => {
     let newInputState = JSON.parse(JSON.stringify(inputState));
-    newInputState[ev.target.id] = ev.target.value;
+    newInputState[ev.target.id] = convertToBool(ev.target.value);
     setInputState(newInputState);
   };
   const handleSaveBtnClick = async (ev) => {

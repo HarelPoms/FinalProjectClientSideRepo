@@ -12,8 +12,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import isImage from "../../validation/isImgUrlValid";
-//import { useSelector } from "react-redux";
-
+import convertToBool from "../../services/convertToBoolUtil";
 import ROUTES from "../../routes/ROUTES";
 import validateMedicineEditSchema, {
     validateEditMedicineFieldFromSchema
@@ -32,11 +31,7 @@ const NewCardPage = () => {
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
-    //const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
-    const convertToBool = (targetValue) => {
-        return targetValue == 'on' ? true : false;
-    }
     const handleCheckboxChange = (ev) => {
         let newInputState = JSON.parse(JSON.stringify(inputState));
         newInputState[ev.target.id] = convertToBool(ev.target.value);
