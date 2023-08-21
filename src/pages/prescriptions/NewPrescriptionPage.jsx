@@ -31,6 +31,7 @@ import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedici
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewPrescriptionPage = () => {
+    let medCounter = 0;
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
     const startingInputVal = {url: "", alt: "", medicineList : [], patientId: payload._id };
     const startingCounterArr = [];
@@ -42,6 +43,14 @@ const NewPrescriptionPage = () => {
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
 
+    const myUniqueId = (itemStr) => {
+        medCounter++;
+        return medCounter + itemStr + Date.now();
+    }
+
+    const getCurrUniqueId = () => {
+        return medCounter;
+    }
     const sequentializeListItem = (item) => {
         let uniqueGeneratedId = uniqueId();
         let newCounterState = JSON.parse(JSON.stringify(medicineListItemCounterState));
@@ -60,7 +69,18 @@ const NewPrescriptionPage = () => {
     }
     
     const deleteItemFromMedicineList = (ev) => {
-        console.log(ev);
+        let idxCounter = -1;
+        let parentOfItem = ev.target.parentNode;
+        while(!parentOfItem.id){
+            parentOfItem = parentOfItem.parentNode;
+        }
+        //ev.target.parentNode.id or ev.target.parentNode.parentNode.id, depending.
+        let newInputState = JSON.parse(JSON.stringify(inputState));
+        newInputState.medicineList = newInputState.medicineList.filter((med) => {++idxCounter; if(parentOfItem.id != idxCounter) {return true}});
+        setInputState(newInputState);
+        console.log(ev.target.parentNode);
+        console.log(parentOfItem.id);
+        console.log(newInputState);
     }
 
     const handleCreateClick = () => {
@@ -160,13 +180,16 @@ const NewPrescriptionPage = () => {
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <List>
                     {inputState.medicineList.map((item) => (
-                        <ListItem disablePadding meditemlistid={1} key={uniqueId(item.medicineName) + Date.now()}>
+                        <ListItem disablePadding meditemlistid={1} key={myUniqueId(item.medicineName)}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <MedicationIcon />
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`}  />
-                                <ListItemButton onClick={deleteItemFromMedicineList}><CancelIcon></CancelIcon></ListItemButton>
+                                <ListItemButton id={getCurrUniqueId()} name={getCurrUniqueId()} onClick={deleteItemFromMedicineList}>
+                                    <CancelIcon>
+                                    </CancelIcon>
+                                </ListItemButton>
                             </ListItemButton>
                         </ListItem>
                     ))}

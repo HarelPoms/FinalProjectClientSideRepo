@@ -35,14 +35,12 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
         newInputState.medicineId = ev.target.value;
         newInputState.medicineName = ev.explicitOriginalTarget.innerText;
         setMedicineToAddState(newInputState);
-        console.log(newInputState);
     }
 
     const handleMedicineUnitsSelectChange = (ev) => {
         let newInputState = JSON.parse(JSON.stringify(medicineToAddState));
         newInputState.medicineUnits = ev.target.value;
         setMedicineToAddState(newInputState);
-        console.log(newInputState);
     }
 
     useEffect(() => {
