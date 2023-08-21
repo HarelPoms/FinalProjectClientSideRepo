@@ -16,7 +16,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import isImage from "../../validation/isImgUrlValid";
-import AddIcon from '@mui/icons-material/Add';
 import ROUTES from "../../routes/ROUTES";
 import validatePrescriptionEditSchema, {
     validateEditPrescriptionFieldFromSchema
@@ -26,6 +25,7 @@ import InputComponent from "../../components/InputComponent";
 import CancelButtonComponent from "../../components/CancelButtonComponent";
 import RefreshButtonComponent from "../../components/RefreshButtonComponent";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
+import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedicineToPrescriptionDialogComponent";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewPrescriptionPage = () => {
@@ -33,12 +33,24 @@ const NewPrescriptionPage = () => {
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
+    const [openNewMedicineDialog, setOpenNewMedicineDialog] = useState(false);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
 
     const handleCreateClick = () => {
-        navigate(ROUTES.NEWMEDICINE);
-    } 
+        setOpenNewMedicineDialog(true);
+    }
+    
+    const handleCancelClick = () => {
+        setOpenNewMedicineDialog(false);
+    }
+
+    const handleSubmitClick = (medicineToAdd) => {
+        let newInputState = JSON.parse(JSON.stringify(inputState));
+        newInputState.medicineList.push(medicineToAdd);
+        setInputState(newInputState);
+        setOpenNewMedicineDialog(false);
+    }
     
     const handleRefreshClick = (ev) => {
         setInputState(startingInputVal);
@@ -50,7 +62,6 @@ const NewPrescriptionPage = () => {
             try{
                 const joiResponse = validatePrescriptionEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
-                console.log(joiResponse);
                 if (!joiResponse) {
                     let inputStateToSend = JSON.parse(JSON.stringify(inputState));
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
@@ -102,7 +113,7 @@ const NewPrescriptionPage = () => {
                 <AddCardIcon />
             </Avatar>
             <Typography component="h1" variant="h4">
-                Create Medicine
+                Submit Prescription Request
             </Typography>
             <Box
             component="img"
@@ -119,23 +130,22 @@ const NewPrescriptionPage = () => {
             <Grid container spacing={2}>
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
+                
+                
                 <List>
                     {inputState.medicineList.map((item) => (
-                        <ListItem disablePadding key={item._id + Date.now()}>
+                        <ListItem disablePadding key={item.medicineName + Date.now()}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <MedicationIcon />
                                 </ListItemIcon>
-                                <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${item.isActive}`} />
+                                <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`}  />
                             </ListItemButton>
                         </ListItem>
                     ))}
                 </List>
-                <Grid item xs={10}></Grid>
-                <Grid item xs={2} >
-                    <Button variant="contained" color="success" sx={ { borderRadius: 18 } } onClick={handleCreateClick}>
-                        <AddIcon />
-                    </Button>
+                <Grid item xs={12}>
+                    <AddMedicineToPrescriptionDialogComponent isDialogOpen={openNewMedicineDialog} handleClickOpenFromFather={handleCreateClick} handleClickCancelFromFather={handleCancelClick} handleAddMedicineToPrescriptionFromFather={handleSubmitClick}  />
                 </Grid>
                 <Grid item xs={6}>
                     <CancelButtonComponent />

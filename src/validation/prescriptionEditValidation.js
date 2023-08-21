@@ -3,11 +3,19 @@ import validation from "./validation";
 import generateMessages from "./utils/msgGenerationUtil";
 import validateFieldFromSchema from "./utils/validateFieldFromSchemaUtil"
 
+let prescriptionSubItemJoiSchema = Joi.object().keys({
+    medicineId: Joi.number().min(1000000).max(9999999).allow(""),
+    medicineName: Joi.string().required(),
+    medicineUnits: Joi.number().integer().min(1).max(5).required(),
+    isActive: Joi.boolean().required()
+})
+
 const editPrescriptionSchema = Joi.object({
     url: Joi.string().min(6).max(1024).allow("").messages(generateMessages("URL", [6,1024], 0,
     [1,1])),
     alt: Joi.string().min(6).max(256).allow("").messages(generateMessages("ALT", [6,256], 0,
-    [1,1]))
+    [1,1])),
+    medicineList: Joi.array().items(prescriptionSubItemJoiSchema)
 });
 
 const editPrescriptionParamsSchema = Joi.object({
