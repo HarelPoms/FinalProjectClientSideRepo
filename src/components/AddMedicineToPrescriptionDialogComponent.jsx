@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
@@ -16,7 +15,7 @@ import { toast } from "react-toastify";
 const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpenFromFather, handleClickCancelFromFather, handleAddMedicineToPrescriptionFromFather}) => {
 
     const [allMedicinesState, setAllMedicinesState] = useState([]);
-    const [medicineToAddState, setMedicineToAddState] = useState({medicineNumber: 0, medicineName: "", medicineUnits: 1, isActive: true});
+    const [medicineToAddState, setMedicineToAddState] = useState({medicineId: 0, medicineName: "", medicineUnits: 1, isActive: true});
     const unitsEnum = [{qtyChoice: 1},{qtyChoice: 2},{qtyChoice: 3}, {qtyChoice: 4}, {qtyChoice: 5} ];
 
     const handleClickOpen = () => {
@@ -33,15 +32,17 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
 
     const handleMedicineNameSelectChange = (ev) =>{
         let newInputState = JSON.parse(JSON.stringify(medicineToAddState));
-        newInputState.medicineNumber = ev.target.value;
+        newInputState.medicineId = ev.target.value;
         newInputState.medicineName = ev.explicitOriginalTarget.innerText;
         setMedicineToAddState(newInputState);
+        console.log(newInputState);
     }
 
     const handleMedicineUnitsSelectChange = (ev) => {
         let newInputState = JSON.parse(JSON.stringify(medicineToAddState));
         newInputState.medicineUnits = ev.target.value;
         setMedicineToAddState(newInputState);
+        console.log(newInputState);
     }
 
     useEffect(() => {
@@ -51,7 +52,7 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
             setAllMedicinesState(allMedicines);
             let newInputState = JSON.parse(JSON.stringify(medicineToAddState));
             newInputState.medicineName = allMedicines[0].title;
-            newInputState.medicineNumber = allMedicines[0].medicineNumber;
+            newInputState.medicineId = allMedicines[0].medicineNumber;
             setMedicineToAddState(newInputState);
         }
         catch(err){
@@ -76,7 +77,7 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
                     <InputLabel id="selectMedicine">Medicine</InputLabel>
                     <Select labelId="medicineLabel"
                             id="MedicineName"
-                            value={medicineToAddState.medicineNumber}
+                            value={medicineToAddState.medicineId}
                             label="Medicine Name"
                             onChange={handleMedicineNameSelectChange}
                     >

@@ -15,7 +15,8 @@ const editPrescriptionSchema = Joi.object({
     [1,1])),
     alt: Joi.string().min(6).max(256).allow("").messages(generateMessages("ALT", [6,256], 0,
     [1,1])),
-    medicineList: Joi.array().items(prescriptionSubItemJoiSchema)
+    medicineList: Joi.array().items(prescriptionSubItemJoiSchema),
+    patientId: Joi.string().hex().length(24).required()
 });
 
 const editPrescriptionParamsSchema = Joi.object({

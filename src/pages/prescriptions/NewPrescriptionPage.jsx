@@ -13,6 +13,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
 import {List} from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { toast } from "react-toastify";
 import isImage from "../../validation/isImgUrlValid";
@@ -20,7 +21,8 @@ import ROUTES from "../../routes/ROUTES";
 import validatePrescriptionEditSchema, {
     validateEditPrescriptionFieldFromSchema
 } from "../../validation/prescriptionEditValidation";
-
+import uniqueId from "lodash/uniqueId"
+import CancelIcon from '@mui/icons-material/Cancel';
 import InputComponent from "../../components/InputComponent";
 import CancelButtonComponent from "../../components/CancelButtonComponent";
 import RefreshButtonComponent from "../../components/RefreshButtonComponent";
@@ -29,13 +31,18 @@ import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedici
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewPrescriptionPage = () => {
-    const startingInputVal = {url: "", alt: "", medicineList : [] };
+    const payload = useSelector((bigPie) => bigPie.authSlice.payload);
+    const startingInputVal = {url: "", alt: "", medicineList : [], patientId: payload._id };
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const [openNewMedicineDialog, setOpenNewMedicineDialog] = useState(false);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
+    
+    const deleteItemFromMedicineList = (ev) => {
+        console.log(ev);
+    }
 
     const handleCreateClick = () => {
         setOpenNewMedicineDialog(true);
@@ -62,20 +69,21 @@ const NewPrescriptionPage = () => {
             try{
                 const joiResponse = validatePrescriptionEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
+                console.log(joiResponse);
                 if (!joiResponse) {
                     let inputStateToSend = JSON.parse(JSON.stringify(inputState));
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
                     delete inputStateToSend.url;
                     delete inputStateToSend.alt;
-                    await axios.post("/medicines/", inputStateToSend);
-                    toast.success("Succeeded to save new medicine");
+                    await axios.post("/prescriptions/", inputStateToSend);
+                    toast.success("Succeeded to save new prescription");
                     //move to homepage
                     navigate(ROUTES.HOME);
                 }
             
             }
             catch(err){
-                toast.error("Failed to save new medicine");
+                toast.error("Failed to save new prescription");
             }
         })();
     };
@@ -134,12 +142,13 @@ const NewPrescriptionPage = () => {
                 
                 <List>
                     {inputState.medicineList.map((item) => (
-                        <ListItem disablePadding key={item.medicineName + Date.now()}>
+                        <ListItem disablePadding key={uniqueId(item.medicineName) + Date.now()}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <MedicationIcon />
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`}  />
+                                <ListItemButton onClick={deleteItemFromMedicineList}><CancelIcon></CancelIcon></ListItemButton>
                             </ListItemButton>
                         </ListItem>
                     ))}
