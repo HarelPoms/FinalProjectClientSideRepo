@@ -33,12 +33,31 @@ import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 const NewPrescriptionPage = () => {
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
     const startingInputVal = {url: "", alt: "", medicineList : [], patientId: payload._id };
+    const startingCounterArr = [];
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const [openNewMedicineDialog, setOpenNewMedicineDialog] = useState(false);
+    const [medicineListItemCounterState, setMedicineListItemCounterState] = useState(startingCounterArr);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
+
+    const sequentializeListItem = (item) => {
+        let uniqueGeneratedId = uniqueId();
+        let newCounterState = JSON.parse(JSON.stringify(medicineListItemCounterState));
+        newCounterState.medicineList.push(uniqueGeneratedId);
+        setMedicineListItemCounterState(newCounterState);
+        return item.medicineName + uniqueGeneratedId + Date.now()
+    }
+
+    const retrieveLatestSequentialId = () => {
+        if(medicineListItemCounterState.length == 0){
+            return 1;
+        }
+        else{
+            return medicineListItemCounterState[medicineListItemCounterState.length] + 1
+        }
+    }
     
     const deleteItemFromMedicineList = (ev) => {
         console.log(ev);
@@ -62,6 +81,7 @@ const NewPrescriptionPage = () => {
     const handleRefreshClick = (ev) => {
         setInputState(startingInputVal);
         setInputsErrorsState(startingInputErrVal);
+        setMedicineListItemCounterState(startingCounterArr);
     }
 
     const handleSaveBtnClick = (ev) => {
@@ -138,11 +158,9 @@ const NewPrescriptionPage = () => {
             <Grid container spacing={2}>
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
-                
-                
                 <List>
                     {inputState.medicineList.map((item) => (
-                        <ListItem disablePadding key={uniqueId(item.medicineName) + Date.now()}>
+                        <ListItem disablePadding meditemlistid={1} key={uniqueId(item.medicineName) + Date.now()}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <MedicationIcon />
