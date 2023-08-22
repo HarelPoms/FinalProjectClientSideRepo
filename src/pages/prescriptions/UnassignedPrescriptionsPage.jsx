@@ -76,6 +76,31 @@ const MyPrescriptionsPage = () => {
         navigate(`/edit_prescription/${id}`); //localhost:3000/edit/123213
     };
 
+    const handleAssumeResponsibility = async (id, doctorIdUpdate) => {
+        try{
+            let response = await axios.put("/prescriptions/" + id,  {doctorId:doctorIdUpdate});
+            if(response.status === 200){
+                let newPrescriptionsArrState = JSON.parse(JSON.stringify(prescriptionsArr));
+                for(let i=0; i<newPrescriptionsArrState.length; i++){
+                    if(newPrescriptionsArrState[i]._id == id) newPrescriptionsArrState[i].doctorId = doctorIdUpdate;
+                }
+                setPrescriptionsArr(newPrescriptionsArrState);
+                let newOriginalPrescriptionsArrState = JSON.parse(JSON.stringify(originalPrescriptionsArr));
+                for(let i=0; i<newOriginalPrescriptionsArrState.length; i++){
+                    if(newOriginalPrescriptionsArrState[i]._id == id) newOriginalPrescriptionsArrState[i].doctorId = doctorIdUpdate;
+                }
+                setOriginalPrescriptionsArr(newOriginalPrescriptionsArrState);
+                toast.success("Prescription update successful");
+            }
+            else{
+                toast.error("Prescription update Failed");
+            }
+        }
+        catch(err){
+            toast.error("Error when assuming responsibility");
+        }
+    }
+
     if (!prescriptionsArr) {
         return <LoadingAnimationComponent />;
     }
@@ -99,9 +124,11 @@ const MyPrescriptionsPage = () => {
                 expiryDate={item.expiryDate}
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}
+                onAssumeResponsibility={handleAssumeResponsibility}
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
-                /> 
+                canApprove={payload && payload.isDoctor && !item.doctorId}
+                />
             </Grid>
             ))}
         </Grid>

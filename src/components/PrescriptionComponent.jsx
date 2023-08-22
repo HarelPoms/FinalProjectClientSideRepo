@@ -13,7 +13,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
-import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import FactCheckIcon from '@mui/icons-material/FactCheck';
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +22,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const PrescriptionComponent = ({
   id,
@@ -35,8 +36,10 @@ const PrescriptionComponent = ({
   expiryDate,
   onDelete,
   onEdit,
+  onAssumeResponsibility,
   canEdit,
   canDelete,
+  canApprove
 }) => {
   const prescriptionDetailsStartingVal = {
         doctorName : "",
@@ -48,6 +51,7 @@ const PrescriptionComponent = ({
   const [prescriptionDetailsState, setPrescriptionState] = useState(prescriptionDetailsStartingVal);
 
   const navigate = useNavigate();
+  const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
   const formatDate = (d) => 
   {
@@ -73,6 +77,10 @@ const PrescriptionComponent = ({
 
   const openDetailsPage = () => {
     navigate(`/full_details_prescription/${id}`);
+  }
+
+  const handleAssumeResponsibilityClick = () => {
+    onAssumeResponsibility(id, payload._id);
   }
 
   useEffect(() => {
@@ -140,6 +148,13 @@ const PrescriptionComponent = ({
           <Fragment>
             <Button variant="text" color="error" onClick={handleDeleteBtnClick}>
               <DeleteForeverIcon />
+            </Button>
+          </Fragment>
+        ) : ("")}
+        {canApprove ? (
+          <Fragment>
+            <Button variant="text" color="primary" onClick={handleAssumeResponsibilityClick}>
+              <FactCheckIcon />
             </Button>
           </Fragment>
         ) : ("")}

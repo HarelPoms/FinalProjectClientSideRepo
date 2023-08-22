@@ -68,40 +68,39 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
             <Dialog open={isDialogOpen} onClose={handleCancel}>
                 <DialogTitle>Add Medicine to Prescription</DialogTitle>
                 <DialogContent>
-                <DialogContentText>
-                    To add a medicine to the prescription, fill in the following
-                </DialogContentText>
-                <FormControl fullWidth sx={{ mb: 1.5, mt:1.5 }}>
-                    <InputLabel id="selectMedicine">Medicine</InputLabel>
-                    <Select labelId="medicineLabel"
-                            id="MedicineName"
-                            value={medicineToAddState.medicineId}
-                            label="Medicine Name"
-                            onChange={handleMedicineNameSelectChange}
-                    >
-                        {allMedicinesState.map((med) => (
-                            <MenuItem value={med.medicineNumber} name={med.title} key={med._id + Date.now()}>{med.title}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-                <FormControl>
-                    <InputLabel id="selectMedicineQty">Amt?</InputLabel>
-                    <Select labelId="medicineQtyLbl"
-                            id="MedicineUnits"
-                            value={medicineToAddState.medicineUnits}
-                            label="Units of Medicine"
-                            onChange={handleMedicineUnitsSelectChange}
-                    >
-                        
-                        {unitsEnum.map((unitOption) => (
-                            <MenuItem value={unitOption.qtyChoice} key={unitOption.qtyChoice + Date.now()}>{unitOption.qtyChoice}</MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+                    <DialogContentText>
+                        To add a medicine to the prescription, fill in the following
+                    </DialogContentText>
+                    <FormControl fullWidth sx={{ mb: 1.5, mt:1.5 }}>
+                        <InputLabel id="selectMedicine">Medicine</InputLabel>
+                        <Select labelId="medicineLabel"
+                                id="MedicineName"
+                                value={medicineToAddState.medicineId}
+                                label="Medicine Name"
+                                onChange={handleMedicineNameSelectChange}
+                        >
+                            {allMedicinesState.map((med) => (
+                                <MenuItem value={med.medicineNumber} name={med.title} key={med._id + Date.now()}>{med.title}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+                    <FormControl>
+                        <InputLabel id="selectMedicineQty">Amt?</InputLabel>
+                        <Select labelId="medicineQtyLbl"
+                                id="MedicineUnits"
+                                value={medicineToAddState.medicineUnits}
+                                label="Units of Medicine"
+                                onChange={handleMedicineUnitsSelectChange}
+                        >
+                            {unitsEnum.map((unitOption) => (
+                                <MenuItem value={unitOption.qtyChoice} key={unitOption.qtyChoice + Date.now()}>{unitOption.qtyChoice}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
                 </DialogContent>
                 <DialogActions>
-                <Button onClick={handleCancel}>Cancel</Button>
-                <Button onClick={handleAddMedicineToPrescription}>Add Medicine to Prescription</Button>
+                    <Button onClick={handleCancel}>Cancel</Button>
+                    <Button onClick={handleAddMedicineToPrescription}>Add Medicine to Prescription</Button>
                 </DialogActions>
             </Dialog>
         </div>

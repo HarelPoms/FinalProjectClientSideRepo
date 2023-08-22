@@ -99,8 +99,10 @@ const MyPrescriptionsPage = () => {
                 expiryDate={item.expiryDate}
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}
+                onAssumeResponsibility={()=>{}}
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
+                canApprove={false}
                 /> 
             </Grid>
             ))}

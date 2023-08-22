@@ -21,7 +21,6 @@ import ROUTES from "../../routes/ROUTES";
 import validatePrescriptionEditSchema, {
     validateEditPrescriptionFieldFromSchema
 } from "../../validation/prescriptionEditValidation";
-import uniqueId from "lodash/uniqueId"
 import CancelIcon from '@mui/icons-material/Cancel';
 import InputComponent from "../../components/InputComponent";
 import CancelButtonComponent from "../../components/CancelButtonComponent";
@@ -34,12 +33,10 @@ const NewPrescriptionPage = () => {
     let medCounter = 0;
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
     const startingInputVal = {url: "", alt: "", medicineList : [], patientId: payload._id };
-    const startingCounterArr = [];
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const [openNewMedicineDialog, setOpenNewMedicineDialog] = useState(false);
-    const [medicineListItemCounterState, setMedicineListItemCounterState] = useState(startingCounterArr);
     const navigate = useNavigate();
     const querySize = useResponsiveQueries();
 
@@ -51,22 +48,6 @@ const NewPrescriptionPage = () => {
     const getCurrUniqueId = () => {
         return medCounter;
     }
-    const sequentializeListItem = (item) => {
-        let uniqueGeneratedId = uniqueId();
-        let newCounterState = JSON.parse(JSON.stringify(medicineListItemCounterState));
-        newCounterState.medicineList.push(uniqueGeneratedId);
-        setMedicineListItemCounterState(newCounterState);
-        return item.medicineName + uniqueGeneratedId + Date.now()
-    }
-
-    const retrieveLatestSequentialId = () => {
-        if(medicineListItemCounterState.length == 0){
-            return 1;
-        }
-        else{
-            return medicineListItemCounterState[medicineListItemCounterState.length] + 1
-        }
-    }
     
     const deleteItemFromMedicineList = (ev) => {
         let idxCounter = -1;
@@ -76,11 +57,8 @@ const NewPrescriptionPage = () => {
         }
         //ev.target.parentNode.id or ev.target.parentNode.parentNode.id, depending.
         let newInputState = JSON.parse(JSON.stringify(inputState));
-        newInputState.medicineList = newInputState.medicineList.filter((med) => {++idxCounter; if(parentOfItem.id != idxCounter) {return true}});
+        newInputState.medicineList = newInputState.medicineList.filter((med) => {++idxCounter; if(parentOfItem.id != idxCounter) {return true} else {return false}});
         setInputState(newInputState);
-        console.log(ev.target.parentNode);
-        console.log(parentOfItem.id);
-        console.log(newInputState);
     }
 
     const handleCreateClick = () => {
@@ -101,7 +79,6 @@ const NewPrescriptionPage = () => {
     const handleRefreshClick = (ev) => {
         setInputState(startingInputVal);
         setInputsErrorsState(startingInputErrVal);
-        setMedicineListItemCounterState(startingCounterArr);
     }
 
     const handleSaveBtnClick = (ev) => {
