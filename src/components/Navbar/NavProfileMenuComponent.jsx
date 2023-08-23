@@ -7,8 +7,10 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/auth";
 import ROUTES from "../../routes/ROUTES";
+import {Divider} from "@mui/material";
 
-const ProfileMenuComponent = ({picSrc }) => {
+
+const ProfileMenuComponent = ({picSrc, userName }) => {
     const [anchorEl2, setAnchorEl2] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -38,7 +40,10 @@ const ProfileMenuComponent = ({picSrc }) => {
             open={anchorEl2 ? true : false}
             onClose={handleClose}
             TransitionComponent={Fade}
-        >
+        >   
+            <MenuItem>{userName.split(" ")[0]}</MenuItem>
+            <MenuItem>{userName.split(" ")[1]}</MenuItem>
+            <Divider></Divider>
             <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
             <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
         </Menu>

@@ -60,7 +60,7 @@ const MyPrescriptionsPage = () => {
 
     const handleDeleteFromInitialPrescriptionsArr = async (id) => {
         try {
-        let response = await axios.delete("/cards/" + id);
+        let response = await axios.delete("/prescriptions/" + id);
         if(response.status === 200){
             setPrescriptionsArr((newPrescriptionsArr) => newPrescriptionsArr.filter((item) => item._id != id));
             toast.success("Prescription deletion successful");
@@ -75,6 +75,30 @@ const MyPrescriptionsPage = () => {
     const handleEditFromInitialPrescriptionsArr = (id) => {
         navigate(`/edit_prescription/${id}`); //localhost:3000/edit/123213
     };
+
+    const handleApprovePrescription = async (id) => {
+        try {
+        let response = await axios.patch("/prescriptions/flipApproved/" + id);
+        if(response.status === 200){
+            let newPrescriptionsArrState = JSON.parse(JSON.stringify(prescriptionsArr));
+                for(let i=0; i<newPrescriptionsArrState.length; i++){
+                    if(newPrescriptionsArrState[i]._id == id) newPrescriptionsArrState[i].isApproved = true;
+                }
+                setPrescriptionsArr(newPrescriptionsArrState);
+                let newOriginalPrescriptionsArrState = JSON.parse(JSON.stringify(originalPrescriptionsArr));
+                for(let i=0; i<newOriginalPrescriptionsArrState.length; i++){
+                    if(newOriginalPrescriptionsArrState[i]._id == id) newOriginalPrescriptionsArrState[i].isApproved = true;
+                }
+                setOriginalPrescriptionsArr(newOriginalPrescriptionsArrState);
+            toast.success("Prescription approval successful");
+        }
+        else{
+            toast.error("Prescription approval Failed");
+        }
+        } catch (err) {
+            toast.error("Error when approving");
+        }
+    }
 
     if (!prescriptionsArr) {
         return <LoadingAnimationComponent />;
@@ -99,10 +123,12 @@ const MyPrescriptionsPage = () => {
                 expiryDate={item.expiryDate}
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}
-                onAssumeResponsibility={()=>{}}
+                onAssumeResponsibility={handleApprovePrescription}
+                onApprove={handleApprovePrescription}
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
-                canApprove={false}
+                canTakeChargeOf={false}
+                canApprove={payload && payload.isDoctor && item.doctorId == payload._id && !item.isApproved}
                 /> 
             </Grid>
             ))}

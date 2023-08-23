@@ -14,15 +14,17 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
 import FactCheckIcon from '@mui/icons-material/FactCheck';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import formatDate from "../services/formatDateUtil";
 
 const PrescriptionComponent = ({
   id,
@@ -37,8 +39,10 @@ const PrescriptionComponent = ({
   onDelete,
   onEdit,
   onAssumeResponsibility,
+  onApprove,
   canEdit,
   canDelete,
+  canTakeChargeOf,
   canApprove
 }) => {
   const prescriptionDetailsStartingVal = {
@@ -52,17 +56,6 @@ const PrescriptionComponent = ({
 
   const navigate = useNavigate();
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
-
-  const formatDate = (d) => 
-  {
-    let date = new Date(d)
-    var dd = date.getDate(); 
-    var mm = date.getMonth()+1;
-    var yyyy = date.getFullYear(); 
-    if(dd<10){dd='0'+dd} 
-    if(mm<10){mm='0'+mm};
-    return d = dd+'/'+mm+'/'+yyyy
-  }
 
   const formatIsAvailable = (validBool) => {
     return validBool ? "Yes" : "No";
@@ -81,6 +74,10 @@ const PrescriptionComponent = ({
 
   const handleAssumeResponsibilityClick = () => {
     onAssumeResponsibility(id, payload._id);
+  }
+
+  const handleApproveClick = () => {
+    onApprove(id);
   }
 
   useEffect(() => {
@@ -151,13 +148,20 @@ const PrescriptionComponent = ({
             </Button>
           </Fragment>
         ) : ("")}
-        {canApprove ? (
+        {canTakeChargeOf ? (
           <Fragment>
             <Button variant="text" color="primary" onClick={handleAssumeResponsibilityClick}>
               <FactCheckIcon />
             </Button>
           </Fragment>
         ) : ("")}
+        {canApprove ? (
+          <Fragment>
+            <Button variant="text" color="success" onClick={handleApproveClick}>
+              <CheckCircleOutlineIcon />
+            </Button>
+          </Fragment>
+        ) : ""}
       </CardActions>
     </Card>
   );

@@ -116,9 +116,11 @@ const MyPrescriptionsPage = () => {
                 onDelete={handleDeleteFromInitialPrescriptionsArr}
                 onEdit={handleEditFromInitialPrescriptionsArr}
                 onAssumeResponsibility={handleAssumeResponsibility}
+                onApprove={()=>{}}
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
-                canApprove={payload && payload.isDoctor && !item.doctorId}
+                canTakeChargeOf={payload && payload.isDoctor && !item.doctorId}
+                canApprove={false}
                 />
             </Grid>
             ))}

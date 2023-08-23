@@ -28,6 +28,7 @@ const MuiNavbar = () => {
   const [isSearchUnfocused, setIsSearchUnfocused] = useState(true);
   const viewportSize = useResponsiveQueries();
   const [avatarURL,setAvatarURL] = useState(defaultAvatar);
+  const [userName, setUserName] = useState("");
   const payload = useSelector((bigPie) => bigPie.authSlice.payload); 
   const isLoggedIn = useSelector(
     (bigPie) => bigPie.authSlice.isLoggedIn
@@ -85,6 +86,7 @@ const getPharmaData = async (id) => {
               else{
                 ({data} = await getUserData(payload._id));
               }
+              setUserName(data.name.firstName + " " + data.name.lastName);
               if(data.image.url && data.image.url !== "" && checkValidURLImage(data.image.url)){
                 setAvatarURL(data.image.url);
               }
@@ -127,7 +129,7 @@ const getPharmaData = async (id) => {
               {isDarkTheme && isSearchUnfocused ? <DarkModeIcon onClick={changeTheme} /> :
               isSearchUnfocused ?
               <LightModeIcon onClick={changeTheme}/> : ""}
-              {isLoggedIn && isSearchUnfocused ? <NavProfileMenuComponent picSrc={avatarURL} /> : ""}
+              {isLoggedIn && isSearchUnfocused ? <NavProfileMenuComponent picSrc={avatarURL} userName={userName} /> : ""}
               {isSearchUnfocused && viewportSize !== "xs" && viewportSize !== "sm" ? <NavbarNotAuthLinks /> : ""}
             </Box>
             
