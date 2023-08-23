@@ -78,18 +78,9 @@ const MyPrescriptionsPage = () => {
 
     const handleAssumeResponsibility = async (id, doctorIdUpdate) => {
         try{
-            let response = await axios.put("/prescriptions/" + id,  {doctorId:doctorIdUpdate});
+            let response = await axios.put("/prescriptions/assumeResponsibility/" + id,  {doctorId:doctorIdUpdate});
             if(response.status === 200){
-                let newPrescriptionsArrState = JSON.parse(JSON.stringify(prescriptionsArr));
-                for(let i=0; i<newPrescriptionsArrState.length; i++){
-                    if(newPrescriptionsArrState[i]._id == id) newPrescriptionsArrState[i].doctorId = doctorIdUpdate;
-                }
-                setPrescriptionsArr(newPrescriptionsArrState);
-                let newOriginalPrescriptionsArrState = JSON.parse(JSON.stringify(originalPrescriptionsArr));
-                for(let i=0; i<newOriginalPrescriptionsArrState.length; i++){
-                    if(newOriginalPrescriptionsArrState[i]._id == id) newOriginalPrescriptionsArrState[i].doctorId = doctorIdUpdate;
-                }
-                setOriginalPrescriptionsArr(newOriginalPrescriptionsArrState);
+                setPrescriptionsArr((newPrescriptionsArr) => newPrescriptionsArr.filter((item) => item._id != id));
                 toast.success("Prescription update successful");
             }
             else{
