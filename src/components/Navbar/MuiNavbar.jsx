@@ -86,7 +86,7 @@ const getPharmaData = async (id) => {
               else{
                 ({data} = await getUserData(payload._id));
               }
-              setUserName(data.name.firstName + " " + data.name.lastName);
+              setUserName(data.name);
               if(data.image.url && data.image.url !== "" && checkValidURLImage(data.image.url)){
                 setAvatarURL(data.image.url);
               }
