@@ -25,7 +25,7 @@ const AboutPage = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} >
-                    <Img alt="Card With Actions for pharma/admin" src={"/assets/images/CardPreview1.PNG"} />
+                    <Img alt="Card With Actions for pharma/admin" src={"/assets/images/MedicinePreview1.PNG"} />
                 </Grid>
                 {/* Row Two */}
                 <Grid item xs={5} sm={5} sx={{mt:5, ml:1}}>
@@ -34,7 +34,7 @@ const AboutPage = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} >
-                    <Img alt="test" src={"/assets/images/CardPreview2.PNG"} />
+                    <Img alt="test" src={"/assets/images/MedicinePreview2.PNG"} />
                 </Grid>
                 {/* Row Three */}
                 <Grid item xs={5} sm={5} sx={{ml:1}}>
@@ -43,7 +43,7 @@ const AboutPage = () => {
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} >
-                    <Img alt="test" src={"/assets/images/PrescriptionPreview1.PNG"} />
+                    <Img alt="test" src={"/assets/images/PrescriptionAllActionsPreview.PNG"} />
                 </Grid>
                 {/* Row Four */}
                 <Grid item xs={5} sm={5} sx={{ml:1}}>
