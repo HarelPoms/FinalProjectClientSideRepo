@@ -31,6 +31,9 @@ const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin, isPh
     else if(isPharma && pharmaUserCheck()){
       return element;
     }
+    else if(isDoc && payload && payload.isDoctor){
+      return element;
+    }
   }
   toast.error("Invalid Permissions");
   return <Navigate to={ROUTES.LOGIN} />;

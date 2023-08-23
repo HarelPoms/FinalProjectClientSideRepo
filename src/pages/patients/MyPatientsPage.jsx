@@ -15,12 +15,13 @@ const MyPatientsPage = () => {
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
     useEffect(() => {
+        
         axios.get("/users/my-patients")
         .then(({ data }) => {
             filterFunc(data);
         })
         .catch((err) => {
-            toast.error("Failed to retrieve this pharmas medicines");
+            toast.error("Failed to retrieve this doctors patients");
         });
     }, []);
     const filterFunc = (data) => {

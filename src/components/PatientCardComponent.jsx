@@ -11,7 +11,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const PatientCardComponent = ({
-    nameObj,
+    name,
     phone,
     email,
     imgUrl,
@@ -20,6 +20,11 @@ const PatientCardComponent = ({
     createdAt
     }) => {
     const [hmoNameState, setHmoNameState] = useState("");
+
+    const formatMiddleName = (middleName) => {
+        if(!middleName) return "";
+        return middleName;
+    }
 
     useEffect(() => {
         (async () => {
@@ -39,7 +44,7 @@ const PatientCardComponent = ({
             <CardMedia component="img" image={imgUrl} alt={alt} />
         </CardActionArea>
         <CardContent>
-            <Typography>Patient Name : {nameObj.firstName + " " + nameObj.middleName + " " + nameObj.lastName}</Typography>
+            <Typography>Patient Name : {name.firstName + " " + formatMiddleName(name.middleName) + " " + name.lastName}</Typography>
             <Typography>Phone : {phone}</Typography>
             <Typography>Email : {email}</Typography>
             <Typography>Register Date : {formatDate(createdAt)}</Typography>
