@@ -12,10 +12,10 @@ const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin, isPh
   const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
   const payload = useSelector((bigState) => bigState.authSlice.payload);
   const adminOrDocCheck = () =>{
-    return (payload && payload.isAdmin && isAdmin) || (payload && payload.isDoc && isDoc);
+    return (payload && payload.isAdmin && isAdmin) || (payload && payload.isDoctor && isDoc);
   }
   const patientUserCheck = () => {
-    return (payload && payload.isAdmin === isAdmin) && (payload && payload.isDoc === isDoc) && (payload && payload.isPharma === isPharma);
+    return (payload && payload.isAdmin === isAdmin) && (payload && payload.isDoctor === isDoc) && (payload && payload.isPharma === isPharma);
   }
   const pharmaUserCheck = () => {
     return (payload && payload.isPharma === isPharma)

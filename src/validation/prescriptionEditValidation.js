@@ -7,7 +7,8 @@ let prescriptionSubItemJoiSchema = Joi.object().keys({
     medicineId: Joi.number().min(1000000).max(9999999).allow(""),
     medicineName: Joi.string().required(),
     medicineUnits: Joi.number().integer().min(1).max(5).required(),
-    isActive: Joi.boolean().required()
+    isActive: Joi.boolean().required(),
+    _id: Joi.string().hex().length(24)
 })
 
 const editPrescriptionSchema = Joi.object({
@@ -16,7 +17,7 @@ const editPrescriptionSchema = Joi.object({
     alt: Joi.string().min(6).max(256).allow("").messages(generateMessages("ALT", [6,256], 0,
     [1,1])),
     medicineList: Joi.array().items(prescriptionSubItemJoiSchema),
-    patientId: Joi.string().hex().length(24).required()
+    patientId: Joi.string().hex().length(24).required(),
 });
 
 const editPrescriptionParamsSchema = Joi.object({

@@ -86,7 +86,6 @@ const NewPrescriptionPage = () => {
             try{
                 const joiResponse = validatePrescriptionEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
-                console.log(joiResponse);
                 if (!joiResponse) {
                     let inputStateToSend = JSON.parse(JSON.stringify(inputState));
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}

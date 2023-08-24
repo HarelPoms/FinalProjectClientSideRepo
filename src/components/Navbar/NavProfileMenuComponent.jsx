@@ -53,10 +53,10 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
         >   
             {/* <MenuItem>{calibrateUserName(userName, true)}</MenuItem> */}
             {isRegularNameOrPharmaName(userName) ? 
-            <Fragment>
+            <div>
                 <MenuItem>{userName.firstName}</MenuItem>
                 <MenuItem>{userName.lastName}</MenuItem>
-            </Fragment> :
+            </div> :
             <MenuItem>{userName}</MenuItem>
             }
             <Divider></Divider>

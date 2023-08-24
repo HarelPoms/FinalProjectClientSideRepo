@@ -117,7 +117,7 @@ const MyPrescriptionsPage = () => {
                 onEdit={handleEditFromInitialPrescriptionsArr}
                 onAssumeResponsibility={handleAssumeResponsibility}
                 onApprove={()=>{}}
-                canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id }
+                canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.doctorId == payload._id && !item.isApproved && item.isActive }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.doctorId == payload._id))}
                 canTakeChargeOf={payload && payload.isDoctor && !item.doctorId}
                 canApprove={false}
