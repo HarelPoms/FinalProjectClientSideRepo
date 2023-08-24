@@ -73,7 +73,7 @@ const MyPrescriptionsPage = () => {
         }
     };
     const handleEditFromInitialPrescriptionsArr = (id) => {
-        navigate(`/edit_prescription/${id}`); //localhost:3000/edit/123213
+        navigate(`/edit_prescription/${id}`);
     };
 
     const handleApprovePrescription = async (id) => {

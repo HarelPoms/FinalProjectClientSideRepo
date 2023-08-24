@@ -12,14 +12,13 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
 import {List} from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import isImage from "../../validation/isImgUrlValid";
 import ROUTES from "../../routes/ROUTES";
 import validatePrescriptionEditSchema, {
-    validateEditPrescriptionFieldFromSchema
+    validateEditPrescriptionParamsSchema ,validateEditPrescriptionFieldFromSchema
 } from "../../validation/prescriptionEditValidation";
 import CancelIcon from '@mui/icons-material/Cancel';
 import InputComponent from "../../components/InputComponent";
@@ -29,16 +28,62 @@ import LoadingAnimationComponent from "../../components/LoadingAnimationComponen
 import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedicineToPrescriptionDialogComponent";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
-const NewPrescriptionPage = () => {
+const EditPrescriptionPage = () => {
     let medCounter = 0;
-    const payload = useSelector((bigPie) => bigPie.authSlice.payload);
-    const startingInputVal = {url: "", alt: "", medicineList : [], patientId: payload._id };
+    const startingInputVal = {url: "", alt: "", medicineList : [], patientId: "" };
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
     const [openNewMedicineDialog, setOpenNewMedicineDialog] = useState(false);
     const navigate = useNavigate();
+    const { id } = useParams();
     const querySize = useResponsiveQueries();
+
+    useEffect(() => {
+        (async () => {
+        try {
+            const errors = validateEditPrescriptionParamsSchema({ id });
+            if (errors) {
+                // there were errors = incorrect id
+                navigate("/");
+                return;
+            }
+            const { data : currPrescription } = await axios.get("/prescriptions/" + id);
+            const { data : myPrescriptions } = await axios.get("/prescriptions/my-prescriptions");
+            let filterObj = myPrescriptions.filter((presc)=>presc._id == id)[0];
+            if(!filterObj){
+                toast.error("You have no permissions for this prescription");
+                navigate(ROUTES.HOME);
+            }
+            let newInputState = {
+                ...currPrescription,
+            };
+            if (currPrescription.image && currPrescription.image.url) {
+                newInputState.url = currPrescription.image.url;
+            } else {
+                newInputState.url = "";
+            }
+            if (currPrescription.image && currPrescription.image.alt) {
+                newInputState.alt = currPrescription.image.alt;
+            } else {
+                newInputState.alt = "";
+            }
+            
+            delete newInputState.__v;
+            delete newInputState.image;
+            delete newInputState._id;
+            delete newInputState.doctorId;
+            delete newInputState.expiryDate;
+            delete newInputState.isApproved;
+            delete newInputState.isActive;
+            delete newInputState.createdAt;
+            delete newInputState.HMO;
+            setInputState(newInputState);
+        } catch (err) {
+            toast.error("Edited Prescription Data loading failed");
+        }
+        })();
+    }, [id]);
 
     const myUniqueId = (itemStr) => {
         medCounter++;
@@ -86,21 +131,20 @@ const NewPrescriptionPage = () => {
             try{
                 const joiResponse = validatePrescriptionEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
-                console.log(joiResponse);
                 if (!joiResponse) {
                     let inputStateToSend = JSON.parse(JSON.stringify(inputState));
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
                     delete inputStateToSend.url;
                     delete inputStateToSend.alt;
-                    await axios.post("/prescriptions/", inputStateToSend);
-                    toast.success("Succeeded to save new prescription");
+                    await axios.put("/prescriptions/" + id, inputStateToSend);
+                    toast.success("Succeeded to save edited prescription");
                     //move to homepage
                     navigate(ROUTES.HOME);
                 }
             
             }
             catch(err){
-                toast.error("Failed to save new prescription");
+                toast.error("Failed to save edited prescription");
             }
         })();
     };
@@ -195,4 +239,4 @@ const NewPrescriptionPage = () => {
         </Container>
     );
 };
-export default NewPrescriptionPage;
+export default EditPrescriptionPage;

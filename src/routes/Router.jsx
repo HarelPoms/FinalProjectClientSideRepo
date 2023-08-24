@@ -12,6 +12,7 @@ import NewMedicinePage from "../pages/medicines/NewMedicinePage";
 import MyMedicinesPage from "../pages/medicines/MyMedicinesPage";
 import EditMedicinePage from "../pages/medicines/EditMedicinePage";
 import NewPrescriptionPage from "../pages/prescriptions/NewPrescriptionPage";
+import EditPrescriptionPage from "../pages/prescriptions/EditPrescriptionPage";
 import MyPatientsPage from "../pages/patients/MyPatientsPage";
 import PermissionsProtectedRoute from "../components/Route_Components/PermissionsProtectedRoute";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
@@ -32,9 +33,8 @@ const Router = () => {
       <Route path={ROUTES.MYFAVMEDICINES} element={
       <LoggedInRoute element={<FavMedicinesPage />} />
       } />
-      <Route path={ROUTES.NEWPRESCRIPTION} element={
-      <LoggedInRoute element={<NewPrescriptionPage />} />
-      } />
+      <Route path={ROUTES.NEWPRESCRIPTION} element={<PermissionsProtectedRoute isAdmin={false} isDoc={false} isDocOrAdmin={false} isPharma={false} element={<NewPrescriptionPage />} />} />
+      <Route path={ROUTES.EDITPRESCRIPTION} element={<PermissionsProtectedRoute isAdmin={false} isDoc={true} isDocOrAdmin={false} isPharma={false} element={<EditPrescriptionPage />} />} />
       <Route path={ROUTES.FULLDETAILSMEDICINE} element={<FullDetailsMedicinePage />} />
       <Route path={ROUTES.NEWMEDICINE} element={<PermissionsProtectedRoute isAdmin={true} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<NewMedicinePage />} />} />
       <Route path={ROUTES.MYMEDICINES} element={<PermissionsProtectedRoute isAdmin={false} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<MyMedicinesPage />} />} />
