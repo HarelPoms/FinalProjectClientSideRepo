@@ -120,7 +120,8 @@ const HomePage = () => {
               onDislike={handleDislikeFromMedicines}
               canEdit={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id)) }
               canDelete={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id))}
-              canLike={payload && !item.likes.includes(payload._id)}
+              canLike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && !item.likes.includes(payload._id)}
+              canDislike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && item.likes.includes(payload._id)}
               isOwnedBySelf={payload && item.pharma_id === payload._id}
             />
           </Grid>

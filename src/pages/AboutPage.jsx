@@ -39,7 +39,7 @@ const AboutPage = () => {
                 {/* Row Three */}
                 <Grid item xs={5} sm={5} sx={{ml:1}}>
                     <Typography sx={{bgcolor:"limegreen"}}>
-                        This is a prescription card, the actions available to you depend on your role (delete, edit, assume responsibility, approve for doctors)
+                        This is a prescription card, the actions available to you depend on your role (delete, edit, assume responsibility, approve [for doctors])
                     </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} >

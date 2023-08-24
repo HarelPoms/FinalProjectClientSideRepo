@@ -31,9 +31,11 @@ const MedicineComponent = ({
   canEdit,
   canDelete,
   canLike,
+  canDislike,
   isOwnedBySelf
 }) => {
   const [likePossible, setLikePossible] = useState(canLike);
+  const [dislikePossible, setDislikePossible] = useState(canDislike);
   const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
 
   const navigate = useNavigate();
@@ -47,11 +49,13 @@ const MedicineComponent = ({
 
   const handleLikeBtnClick = () => {
     setLikePossible(!likePossible);
+    setDislikePossible(!dislikePossible);
     onLike(id);
   }
 
   const handleDislikeBtnClick = () =>{
     setLikePossible(!likePossible);
+    setDislikePossible(!dislikePossible);
     onDislike(id);
   }
   const openDetailsPage = () => {
@@ -71,7 +75,7 @@ const MedicineComponent = ({
         {isLoggedIn && likePossible && !isOwnedBySelf ? 
         <Button variant="text" color="primary" onClick={handleLikeBtnClick}>
           <FavoriteIcon />
-        </Button> : isLoggedIn && !isOwnedBySelf ?
+        </Button> : isLoggedIn && dislikePossible && !isOwnedBySelf ?
         <Button variant="text" color="primary" onClick={handleDislikeBtnClick}>
           <HeartBrokenIcon />
         </Button> : ""

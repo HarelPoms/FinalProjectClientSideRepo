@@ -101,7 +101,7 @@ const FavMedicinesPage = () => {
         <Box>
         <Typography variant="h1"> My Favorite Cards Page </Typography>
         <Typography variant="h3"> Cards I've favorited </Typography>
-        {medsArr && medsArr.length === 0 && <Divider> You have no favorite medicines </Divider>}
+        {medsArr && medsArr.length === 0 && <Divider sx={{mb:20, mt:10}}> You have no favorite medicines </Divider>}
         {medsArr && medsArr.length > 0 && <Divider> My Favorited Medicines </Divider>}
         <Grid container spacing={2}>
             {medsArr.map((item) => (
@@ -118,7 +118,8 @@ const FavMedicinesPage = () => {
                 onDislike={handleDislikeFromMedicines}
                 canEdit={payload && (payload.isDoctor || payload.isAdmin) && item.user_id == payload._id }
                 canDelete={payload && (payload.isAdmin || (payload.isDoctor && item.user_id == payload._id))}
-                canLike={payload && !item.likes.includes(payload._id)}
+                canLike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && !item.likes.includes(payload._id)}
+                canDislike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && item.likes.includes(payload._id)}
                 isOwnedBySelf={item.user_id === payload._id}
                 /> 
             </Grid>
