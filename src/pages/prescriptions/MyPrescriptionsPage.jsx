@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
+import filterPrescriptionsByPatientOrDoctorName from "../../services/prescriptionFilterUtil";
 
 const MyPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);
@@ -39,17 +40,16 @@ const MyPrescriptionsPage = () => {
                 when component loaded and states not loaded
             */
             setOriginalPrescriptionsArr(data);
-            //same thing
-            let filterMetTracker = [];
-            let filterIndex = -1;
-            for(let currPrescription of data){
-                let currPrescriptionPatientName = await axios.get("/users/" + currPrescription.patientId);
-                let currPrescriptionDoctorName = await axios.get("/users/" + currPrescription.doctorId);
-                if(currPrescriptionPatientName.startsWith(filter) || currPrescriptionDoctorName.startsWith(filter)) {filterMetTracker.push(true)} else {filterMetTracker.push(false)}
-            }
-            setPrescriptionsArr(
-                data.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];})
-            );
+
+            filterPrescriptionsByPatientOrDoctorName(data, filter).then(
+                (filterMetTracker) => {
+                    let filterIndex = -1;
+                    setPrescriptionsArr(
+                    data.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];}));
+                }
+            ).catch((error) => {
+                console.log(error);
+            })
             
             return;
         }
@@ -57,18 +57,17 @@ const MyPrescriptionsPage = () => {
             /*
                 when all loaded and states loaded
             */
-            //need to think of how to relate word typed to id
             let newOriginalPrescriptionsArr = JSON.parse(JSON.stringify(originalPrescriptionsArr));
-            let filterMetTracker = [];
-            let filterIndex = -1;
-            for(let currPrescription of newOriginalPrescriptionsArr){
-                let currPrescriptionPatientName = await axios.get("/users/" + currPrescription.patientId);
-                let currPrescriptionDoctorName = await axios.get("/users/" + currPrescription.doctorId);
-                if(currPrescriptionPatientName.startsWith(filter) || currPrescriptionDoctorName.startsWith(filter)) {filterMetTracker.push(true)} else {filterMetTracker.push(false)}
-            }
-            setPrescriptionsArr(
-                newOriginalPrescriptionsArr.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];})
-            );
+
+            filterPrescriptionsByPatientOrDoctorName(newOriginalPrescriptionsArr, filter).then(
+                (filterMetTracker) => {
+                    let filterIndex = -1;
+                    setPrescriptionsArr(
+                    newOriginalPrescriptionsArr.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];}));
+                }
+            ).catch((error) => {
+                console.log(error);
+            })
         }
     };
     useEffect(() => {

@@ -43,9 +43,6 @@ const adminPages = [
 ]
 const NavbarMenuLinks = ({isMobile}) => {
     const payload = useSelector((bigPie) => bigPie.authSlice.payload);
-    const isLoggedIn = useSelector(
-    (bigPie) => bigPie.authSlice.isLoggedIn
-    );
 
     return (
         <Fragment>

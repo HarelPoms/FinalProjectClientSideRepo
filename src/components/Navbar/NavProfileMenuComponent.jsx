@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/auth";
 import ROUTES from "../../routes/ROUTES";
 import {Divider} from "@mui/material";
-import { Fragment } from "react";
 
 const ProfileMenuComponent = ({picSrc, userName }) => {
     const [anchorEl2, setAnchorEl2] = useState(null);
@@ -34,11 +33,6 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
         if (userName.firstName) return true;
         return false;
     }
-    const calibrateUserName = (givenName, firstOrLast) => {
-        if (!userName.split(" ")[0]) return givenName;
-        if (firstOrLast) return userName.split(" ")[0];
-        return userName.split(" ")[1];
-    }
 
     return (
         <div>
@@ -51,7 +45,6 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
             onClose={handleClose}
             TransitionComponent={Fade}
         >   
-            {/* <MenuItem>{calibrateUserName(userName, true)}</MenuItem> */}
             {isRegularNameOrPharmaName(userName) ? 
             <div>
                 <MenuItem>{userName.firstName}</MenuItem>

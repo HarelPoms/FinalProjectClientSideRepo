@@ -60,7 +60,6 @@ const LoginPage = () => {
   };
   const handleCheckboxChange = (ev) => {
     setIsPharmaState(ev.target.checked);
-    console.log(isPharmaState);
   };
   const handleInputChange = (ev) => {
     let newInputState = JSON.parse(JSON.stringify(inputState));
