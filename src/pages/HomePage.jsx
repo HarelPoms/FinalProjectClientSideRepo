@@ -10,6 +10,7 @@ import useQueryParams from "../hooks/useQueryParams";
 import { useSelector } from "react-redux";
 import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
 import isImage from "../validation/isImgUrlValid";
+import CheckIfNumberStartsWithPrefix from "../services/checkPrefixNumsUtil";
 
 const HomePage = () => {
   const [originalMedsArr, setOriginalMedsArr] = useState(null);
@@ -41,7 +42,7 @@ const HomePage = () => {
         when component loaded and states not loaded
       */
       setOriginalMedsArr(data);
-      setMedsArr(data.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter)));
+      setMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
       return;
     }
     if (originalMedsArr) {
@@ -50,7 +51,7 @@ const HomePage = () => {
       */
       let newOriginalCardsArr = JSON.parse(JSON.stringify(originalMedsArr));
       setMedsArr(
-        newOriginalCardsArr.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter))
+        newOriginalCardsArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
       );
     }
   };

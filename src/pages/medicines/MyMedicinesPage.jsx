@@ -11,6 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ROUTES from "../../routes/ROUTES";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
+import CheckIfNumberStartsWithPrefix from "../../services/checkPrefixNumsUtil";
 
 const MyCardsPage = () => {
     const [originalMyMedsArr, setOriginalMyMedsArr] = useState(null);
@@ -34,23 +35,23 @@ const MyCardsPage = () => {
         }
         let filter = "";
         if (qparams.filter) {
-        filter = qparams.filter;
+            filter = qparams.filter;
         }
         if (!originalMyMedsArr && data) {
-        /*
-            when component loaded and states not loaded
-        */
-        setOriginalMyMedsArr(data);
-        setMyMedsArr(data.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter)));
-        return;
+            /*
+                when component loaded and states not loaded
+            */
+            setOriginalMyMedsArr(data);
+            setMyMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
+            return;
         }
         if (originalMyMedsArr) {
-        /*
-            when all loaded and states loaded
-        */
-        let newOriginalMyMedsArr = JSON.parse(JSON.stringify(originalMyMedsArr));
-        setMyMedsArr(
-            newOriginalMyMedsArr.filter((med) => med.title.startsWith(filter) || med.medicineNumber.startsWith(filter))
+            /*
+                when all loaded and states loaded
+            */
+            let newOriginalMyMedsArr = JSON.parse(JSON.stringify(originalMyMedsArr));
+            setMyMedsArr(
+                newOriginalMyMedsArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
         );
         }
     };

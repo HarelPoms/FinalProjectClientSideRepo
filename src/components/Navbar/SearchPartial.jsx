@@ -68,8 +68,8 @@ const SearchPartial = ({handleSearchFocus}) => {
     else if(currLoc.includes("my_fav_medicines")){
       navigate(`${ROUTES.MYFAVMEDICINES}?filter=${searchInput}`);
     }
-    else if(currLoc.includes("my_prescriptions")){
-      navigate(`${ROUTES.MYPRESCRIPTIONS}?filter=${searchInput}`);
+    else if(currLoc.includes("unassigned_prescriptions")){
+      navigate(`${ROUTES.UNASSIGNEDPRESCRIPTIONS}?filter=${searchInput}`);
     }
     else{
       navigate(`${ROUTES.HOME}?filter=${searchInput}`);

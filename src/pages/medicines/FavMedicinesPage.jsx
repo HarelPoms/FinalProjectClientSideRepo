@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
+import CheckIfNumberStartsWithPrefix from "../../services/checkPrefixNumsUtil";
 
 const FavMedicinesPage = () => {
     const [originalMedsArr, setOriginalMedsArr] = useState(null);
@@ -28,29 +29,29 @@ const FavMedicinesPage = () => {
     }, []);
     const filterFunc = (data) => {
         if (!originalMedsArr && !data) {
-        return;
+            return;
         }
         let filter = "";
         if (qparams.filter) {
-        filter = qparams.filter;
+            filter = qparams.filter;
         }
         if (!originalMedsArr && data) {
-        /*
-            when component loaded and states not loaded
-        */
-        //let favData = data.filter((card) => card.likes.includes(payload._id));
-        setOriginalMedsArr(data);
-        setMedsArr(data.filter((medicine) => medicine.title.startsWith(filter) || medicine.medicineNumber.startsWith(filter)));
+            /*
+                when component loaded and states not loaded
+            */
+            //let favData = data.filter((card) => card.likes.includes(payload._id));
+            setOriginalMedsArr(data);
+            setMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
         
         return;
         }
         if (originalMedsArr) {
-        /*
-            when all loaded and states loaded
-        */
-        let newOriginalMedicinesArr = JSON.parse(JSON.stringify(originalMedsArr));
-        setMedsArr(
-            newOriginalMedicinesArr.filter((card) => card.title.startsWith(filter) || card.bizNumber.startsWith(filter))
+            /*
+                when all loaded and states loaded
+            */
+            let newOriginalMedicinesArr = JSON.parse(JSON.stringify(originalMedsArr));
+            setMedsArr(
+                newOriginalMedicinesArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
         );
         }
     };

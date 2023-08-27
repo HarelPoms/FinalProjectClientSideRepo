@@ -26,32 +26,49 @@ const MyPrescriptionsPage = () => {
             toast.error("Failed to retrieve my prescriptions data");
         });
     }, []);
-    const filterFunc = (data) => {
+    const filterFunc = async (data) => {
         if (!originalPrescriptionsArr && !data) {
-        return;
+            return;
         }
         let filter = "";
         if (qparams.filter) {
-        filter = qparams.filter;
+            filter = qparams.filter;
         }
         if (!originalPrescriptionsArr && data) {
-        /*
-            when component loaded and states not loaded
-        */
-        setOriginalPrescriptionsArr(data);
-        setPrescriptionsArr(data.filter((prescription) => prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter)));
-        
-        return;
+            /*
+                when component loaded and states not loaded
+            */
+            setOriginalPrescriptionsArr(data);
+            //same thing
+            let filterMetTracker = [];
+            let filterIndex = -1;
+            for(let currPrescription of data){
+                let currPrescriptionPatientName = await axios.get("/users/" + currPrescription.patientId);
+                let currPrescriptionDoctorName = await axios.get("/users/" + currPrescription.doctorId);
+                if(currPrescriptionPatientName.startsWith(filter) || currPrescriptionDoctorName.startsWith(filter)) {filterMetTracker.push(true)} else {filterMetTracker.push(false)}
+            }
+            setPrescriptionsArr(
+                data.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];})
+            );
+            
+            return;
         }
         if (originalPrescriptionsArr) {
-        /*
-            when all loaded and states loaded
-        */
-       //need to think of how to relate word typed to id
-        let newOriginalPrescriptionsArr = JSON.parse(JSON.stringify(originalPrescriptionsArr));
-        setPrescriptionsArr(
-            newOriginalPrescriptionsArr.filter((prescription) => prescription.patientId.startsWith(filter) || prescription.hmoId.startsWith(filter))
-        );
+            /*
+                when all loaded and states loaded
+            */
+            //need to think of how to relate word typed to id
+            let newOriginalPrescriptionsArr = JSON.parse(JSON.stringify(originalPrescriptionsArr));
+            let filterMetTracker = [];
+            let filterIndex = -1;
+            for(let currPrescription of newOriginalPrescriptionsArr){
+                let currPrescriptionPatientName = await axios.get("/users/" + currPrescription.patientId);
+                let currPrescriptionDoctorName = await axios.get("/users/" + currPrescription.doctorId);
+                if(currPrescriptionPatientName.startsWith(filter) || currPrescriptionDoctorName.startsWith(filter)) {filterMetTracker.push(true)} else {filterMetTracker.push(false)}
+            }
+            setPrescriptionsArr(
+                newOriginalPrescriptionsArr.filter((prescription) => {++filterIndex; return filterMetTracker[filterIndex];})
+            );
         }
     };
     useEffect(() => {
