@@ -154,7 +154,7 @@ const NewPrescriptionPage = () => {
             <Grid container spacing={2}>
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
-                <List>
+                <List sx={{margin:"auto"}}>
                     {inputState.medicineList.map((item) => (
                         <ListItem disablePadding key={myUniqueId(item.medicineName)}>
                             <ListItemButton>
@@ -170,7 +170,7 @@ const NewPrescriptionPage = () => {
                         </ListItem>
                     ))}
                 </List>
-                <Grid item xs={12}>
+                <Grid item xs={12} sx={{textAlign:"center"}}>
                     <AddMedicineToPrescriptionDialogComponent isDialogOpen={openNewMedicineDialog} handleClickOpenFromFather={handleCreateClick} handleClickCancelFromFather={handleCancelClick} handleAddMedicineToPrescriptionFromFather={handleSubmitClick}  />
                 </Grid>
                 <Grid item xs={6}>
