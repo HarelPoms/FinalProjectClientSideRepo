@@ -19,7 +19,7 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import InfoIcon from '@mui/icons-material/Info';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import AttributionIcon from '@mui/icons-material/Attribution';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ROUTES from "./routes/ROUTES";
 
 const light = {
@@ -90,9 +90,9 @@ function App() {
                 setValue(newValue);
               }}
             >
-            <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={handleToAboutClick}/>
-              {payload && payload.isPharma &&  <BottomNavigationAction label="Favorite Medicines" icon={<FavoriteIcon />} onClick={handleToFavMedicinesClick}/>}
-              {payload && ((!payload.isPharma && !payload.isAdmin) || payload.isDoctor) && <BottomNavigationAction label="My Prescriptions" icon={<AttributionIcon />} onClick={handleToMyPrescriptionsClick}/>}
+              <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={handleToAboutClick}/>
+              {payload && payload.isPharma && <BottomNavigationAction label="Favorite Medicines" icon={<FavoriteIcon />} onClick={handleToFavMedicinesClick}/>}
+              {payload && ((!payload.isPharma && !payload.isAdmin) || payload.isDoctor) && <BottomNavigationAction label="My Prescriptions" icon={<FormatListBulletedIcon />} onClick={handleToMyPrescriptionsClick}/>}
             </BottomNavigation>
           </Box>
         </footer>
