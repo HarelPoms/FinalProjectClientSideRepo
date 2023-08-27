@@ -24,15 +24,9 @@ const Router = () => {
       <Route path={ROUTES.HOME} element={<HomePage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
-      <Route path={ROUTES.MYPRESCRIPTIONS} element={
-      <LoggedInRoute element={<MyPrescriptionsPage />} />
-      } />
-      <Route path={ROUTES.UNASSIGNEDPRESCRIPTIONS} element={
-      <LoggedInRoute element={<UnassignedPrescriptionsPage />} />
-      } />
-      <Route path={ROUTES.MYFAVMEDICINES} element={
-      <LoggedInRoute element={<FavMedicinesPage />} />
-      } />
+      <Route path={ROUTES.MYPRESCRIPTIONS} element={<PermissionsProtectedRoute isAdmin={false} isDoc={true} isDocOrAdmin={false} isPharma={false} element={<MyPrescriptionsPage />} />} />
+      <Route path={ROUTES.UNASSIGNEDPRESCRIPTIONS} element={<PermissionsProtectedRoute isAdmin={false} isDoc={true} isDocOrAdmin={false} isPharma={false} element={<UnassignedPrescriptionsPage />} />} />
+      <Route path={ROUTES.MYFAVMEDICINES} element={<PermissionsProtectedRoute isAdmin={false} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<FavMedicinesPage />} />} />
       <Route path={ROUTES.NEWPRESCRIPTION} element={<PermissionsProtectedRoute isAdmin={false} isDoc={false} isDocOrAdmin={false} isPharma={false} element={<NewPrescriptionPage />} />} />
       <Route path={ROUTES.EDITPRESCRIPTION} element={<PermissionsProtectedRoute isAdmin={false} isDoc={true} isDocOrAdmin={false} isPharma={false} element={<EditPrescriptionPage />} />} />
       <Route path={ROUTES.FULLDETAILSMEDICINE} element={<FullDetailsMedicinePage />} />

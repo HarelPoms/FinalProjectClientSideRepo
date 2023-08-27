@@ -15,7 +15,7 @@ const PermissionsProtectedRoute = ({ element, isAdmin, isDoc, isDocOrAdmin, isPh
     return (payload && payload.isAdmin && isAdmin) || (payload && payload.isDoctor && isDoc);
   }
   const patientUserCheck = () => {
-    return (payload && payload.isAdmin === isAdmin) && (payload && payload.isDoctor === isDoc) && (payload && payload.isPharma === isPharma);
+    return (payload && payload.isAdmin === false) && (payload && payload.isDoctor === false) && (payload && payload.isPharma === false);
   }
   const pharmaUserCheck = () => {
     return (payload && payload.isPharma === isPharma)
