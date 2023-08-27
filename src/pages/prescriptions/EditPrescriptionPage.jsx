@@ -27,6 +27,7 @@ import RefreshButtonComponent from "../../components/RefreshButtonComponent";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedicineToPrescriptionDialogComponent";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
+import "../../stylesheets/prescriptionStyle.css";
 
 const EditPrescriptionPage = () => {
     let medCounter = 0;
@@ -199,6 +200,7 @@ const EditPrescriptionPage = () => {
             <Grid container spacing={2}>
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
+                {/* sx={{margin:"auto"}} */}
                 <List sx={{margin:"auto"}}>
                     {inputState.medicineList.map((item) => (
                         <ListItem disablePadding key={myUniqueId(item.medicineName)}>
@@ -215,7 +217,7 @@ const EditPrescriptionPage = () => {
                         </ListItem>
                     ))}
                 </List>
-                <Grid item xs={12} sx={{textAlign:"center"}}>
+                <Grid item xs={12} className="addMedicineToPrescriptionDialogBtn">
                     <AddMedicineToPrescriptionDialogComponent isDialogOpen={openNewMedicineDialog} handleClickOpenFromFather={handleCreateClick} handleClickCancelFromFather={handleCancelClick} handleAddMedicineToPrescriptionFromFather={handleSubmitClick}  />
                 </Grid>
                 <Grid item xs={6}>

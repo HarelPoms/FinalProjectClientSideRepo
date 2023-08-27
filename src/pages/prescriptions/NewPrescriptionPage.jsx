@@ -28,6 +28,7 @@ import RefreshButtonComponent from "../../components/RefreshButtonComponent";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedicineToPrescriptionDialogComponent";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
+import "../../stylesheets/prescriptionStyle.css";
 
 const NewPrescriptionPage = () => {
     let medCounter = 0;
@@ -170,7 +171,7 @@ const NewPrescriptionPage = () => {
                         </ListItem>
                     ))}
                 </List>
-                <Grid item xs={12} sx={{textAlign:"center"}}>
+                <Grid item xs={12} className="addMedicineToPrescriptionDialogBtn">
                     <AddMedicineToPrescriptionDialogComponent isDialogOpen={openNewMedicineDialog} handleClickOpenFromFather={handleCreateClick} handleClickCancelFromFather={handleCancelClick} handleAddMedicineToPrescriptionFromFather={handleSubmitClick}  />
                 </Grid>
                 <Grid item xs={6}>
