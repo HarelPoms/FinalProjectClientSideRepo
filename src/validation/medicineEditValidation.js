@@ -4,7 +4,7 @@ import generateMessages from "./utils/msgGenerationUtil";
 import validateFieldFromSchema from "./utils/validateFieldFromSchemaUtil"
 
 const editMedicineSchema = Joi.object({
-  title: Joi.string().min(2).max(256).required().messages(generateMessages("Title", [2,256], 0,
+  name: Joi.string().min(2).max(256).required().messages(generateMessages("Name", [2,256], 0,
   [1,1,1])),
   subTitle: Joi.string().min(2).max(256).required().messages(generateMessages("Subtitle", [2,256], 0,
   [1,1,1])),

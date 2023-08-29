@@ -41,7 +41,7 @@ const FavMedicinesPage = () => {
             */
             //let favData = data.filter((card) => card.likes.includes(payload._id));
             setOriginalMedsArr(data);
-            setMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
+            setMedsArr(data.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
         
         return;
         }
@@ -51,7 +51,7 @@ const FavMedicinesPage = () => {
             */
             let newOriginalMedicinesArr = JSON.parse(JSON.stringify(originalMedsArr));
             setMedsArr(
-                newOriginalMedicinesArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
+                newOriginalMedicinesArr.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
         );
         }
     };
@@ -110,7 +110,7 @@ const FavMedicinesPage = () => {
                 <MedicineComponent
                 id={item._id}
                 img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}
-                title={item.title}
+                name={item.name}
                 subTitle={item.subTitle}
                 description={item.description}
                 onDelete={handleDeleteFromInitialMedicinesArr}

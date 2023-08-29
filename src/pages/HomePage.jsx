@@ -42,7 +42,7 @@ const HomePage = () => {
         when component loaded and states not loaded
       */
       setOriginalMedsArr(data);
-      setMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
+      setMedsArr(data.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
       return;
     }
     if (originalMedsArr) {
@@ -51,7 +51,7 @@ const HomePage = () => {
       */
       let newOriginalCardsArr = JSON.parse(JSON.stringify(originalMedsArr));
       setMedsArr(
-        newOriginalCardsArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
+        newOriginalCardsArr.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
       );
     }
   };
@@ -111,7 +111,7 @@ const HomePage = () => {
           <Grid item xs={6} md={4} key={item._id + Date.now()}>
             <MedicineComponent
               id={item._id}
-              title={item.title}
+              name={item.name}
               subTitle={item.subTitle}
               description={item.description}
               img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}

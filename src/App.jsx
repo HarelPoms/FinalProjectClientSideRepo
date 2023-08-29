@@ -91,7 +91,7 @@ function App() {
               }}
             >
               <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={handleToAboutClick}/>
-              {payload && payload.isPharma && <BottomNavigationAction label="Favorite Medicines" icon={<FavoriteIcon />} onClick={handleToFavMedicinesClick}/>}
+              {payload && (!payload.isPharma && !payload.isAdmin && !payload.isDoctor) && <BottomNavigationAction label="Favorite Medicines" icon={<FavoriteIcon />} onClick={handleToFavMedicinesClick}/>}
               {payload && ((!payload.isPharma && !payload.isAdmin) || payload.isDoctor) && <BottomNavigationAction label="My Prescriptions" icon={<FormatListBulletedIcon />} onClick={handleToMyPrescriptionsClick}/>}
             </BottomNavigation>
           </Box>

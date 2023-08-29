@@ -25,7 +25,7 @@ import LoadingAnimationComponent from "../../components/LoadingAnimationComponen
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewCardPage = () => {
-    const startingInputVal = {title: "", subTitle: "", description: "", url: "", alt: "", prescription_required: false };
+    const startingInputVal = {name: "", subTitle: "", description: "", url: "", alt: "", prescription_required: false };
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
@@ -47,7 +47,6 @@ const NewCardPage = () => {
             try{
                 const joiResponse = validateMedicineEditSchema(inputState);
                 setInputsErrorsState(joiResponse);
-                console.log(joiResponse);
                 if (!joiResponse) {
                     let inputStateToSend = JSON.parse(JSON.stringify(inputState));
                     inputStateToSend.image = {url: inputStateToSend.url, alt: inputStateToSend.alt}
@@ -114,7 +113,7 @@ const NewCardPage = () => {
             />
             <Box component="div" noValidate sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-                <InputComponent id="title" label="Title" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
+                <InputComponent id="name" label="Name" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="subTitle" label="Subtitle" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="description" label="Description" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import isImage from "../validation/isImgUrlValid";
 
 const MedicineDetailsComponent = ({
-    title, subTitle, description, url, alt, medicineNumber
+    name, subTitle, description, url, alt, medicineNumber
 }) => {
 
 return (
@@ -19,7 +19,7 @@ return (
     <CardActionArea>
         <CardMedia component="img" image={isImage(url) ? url : "/assets/images/placeholderCardImg.png"} alt={alt} />
     </CardActionArea>
-    <CardHeader title={title} subheader={subTitle}></CardHeader>
+    <CardHeader title={name} subheader={subTitle}></CardHeader>
     <CardContent>
         <Typography variant="h3">Medicine details</Typography>
         <Typography>{description}</Typography>
@@ -30,20 +30,12 @@ return (
 };
 
 MedicineDetailsComponent.propTypes = {
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     subTitle: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    web: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    state: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    street: PropTypes.string.isRequired,
-    houseNumber: PropTypes.string.isRequired,
-    // zipCode: PropTypes.number.isRequired
+    medicineNumber: PropTypes.number.isRequired
 };
 
 MedicineDetailsComponent.defaultProps = {

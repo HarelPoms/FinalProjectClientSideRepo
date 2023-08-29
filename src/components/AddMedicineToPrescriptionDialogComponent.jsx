@@ -49,7 +49,7 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
             let {data: allMedicines} = await axios.get("/medicines/");
             setAllMedicinesState(allMedicines);
             let newInputState = JSON.parse(JSON.stringify(medicineToAddState));
-            newInputState.medicineName = allMedicines[0].title;
+            newInputState.medicineName = allMedicines[0].name;
             newInputState.medicineId = allMedicines[0].medicineNumber;
             setMedicineToAddState(newInputState);
         }
@@ -80,7 +80,7 @@ const AddMedicineToPrescriptionDialogComponent = ({isDialogOpen, handleClickOpen
                                 onChange={handleMedicineNameSelectChange}
                         >
                             {allMedicinesState.map((med) => (
-                                <MenuItem value={med.medicineNumber} name={med.title} key={med._id + Date.now()}>{med.title}</MenuItem>
+                                <MenuItem value={med.medicineNumber} name={med.name} key={med._id + Date.now()}>{med.name}</MenuItem>
                             ))}
                         </Select>
                     </FormControl>

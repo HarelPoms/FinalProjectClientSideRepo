@@ -42,7 +42,7 @@ const MyCardsPage = () => {
                 when component loaded and states not loaded
             */
             setOriginalMyMedsArr(data);
-            setMyMedsArr(data.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
+            setMyMedsArr(data.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter)));
             return;
         }
         if (originalMyMedsArr) {
@@ -51,7 +51,7 @@ const MyCardsPage = () => {
             */
             let newOriginalMyMedsArr = JSON.parse(JSON.stringify(originalMyMedsArr));
             setMyMedsArr(
-                newOriginalMyMedsArr.filter((med) => med.title.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
+                newOriginalMyMedsArr.filter((med) => med.name.startsWith(filter) || CheckIfNumberStartsWithPrefix(med.medicineNumber, filter))
         );
         }
     };
@@ -108,7 +108,7 @@ const MyCardsPage = () => {
                 <MedicineComponent
                 id={item._id}
                 img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}
-                title={item.title}
+                name={item.name}
                 subTitle={item.subTitle}
                 description={item.description}
                 onDelete={handleDeleteFromInitialMedicinesArr}

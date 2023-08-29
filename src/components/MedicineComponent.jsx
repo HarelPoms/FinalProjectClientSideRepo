@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 const MedicineComponent = ({
   id,
   img,
-  title,
+  name,
   subTitle,
   description,
   onDelete,
@@ -67,7 +67,7 @@ const MedicineComponent = ({
       <CardActionArea onClick={openDetailsPage}>
         <CardMedia component="img" image={img} />
       </CardActionArea>
-      <CardHeader title={title} subheader={subTitle}></CardHeader>
+      <CardHeader title={name} subheader={subTitle}></CardHeader>
       <CardContent>
         <Typography>{description}</Typography>
       </CardContent>
@@ -104,7 +104,7 @@ const MedicineComponent = ({
 MedicineComponent.propTypes = {
   id: PropTypes.string,
   img: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   subTitle: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   onDelete: PropTypes.func,
