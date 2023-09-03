@@ -25,7 +25,7 @@ import LoadingAnimationComponent from "../../components/LoadingAnimationComponen
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewCardPage = () => {
-    const startingInputVal = {name: "", subTitle: "", description: "", price: 10, url: "", alt: "", prescription_required: false };
+    const startingInputVal = {name: "", subTitle: "", description: "", price: "", url: "", alt: "", prescription_required: false };
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
