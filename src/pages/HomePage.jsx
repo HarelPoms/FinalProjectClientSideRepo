@@ -111,10 +111,11 @@ const HomePage = () => {
           <Grid item xs={6} md={4} key={item._id + Date.now()}>
             <MedicineComponent
               id={item._id}
+              img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}
               name={item.name}
               subTitle={item.subTitle}
               description={item.description}
-              img={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderMedicineImg.jpg"}
+              itemToAddOrRemove={{"_id": item._id, "name": item.name, "image": item.image}}
               onDelete={handleDeleteFromInitialCardsArr}
               onEdit={handleEditFromInitialMedicineArr}
               onLike={handleLikeFromMedicines}
@@ -123,6 +124,7 @@ const HomePage = () => {
               canDelete={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id))}
               canLike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && !item.likes.includes(payload._id)}
               canDislike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && item.likes.includes(payload._id)}
+              canAddToCart={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor)}
               isOwnedBySelf={payload && item.pharma_id === payload._id}
             />
           </Grid>

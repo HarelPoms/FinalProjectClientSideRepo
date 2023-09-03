@@ -7,21 +7,22 @@ const shoppingCartSlice = createSlice({
     initialState,
     reducers: {
         insertItemToCart(state, itemToInsert) {
-            const isItemInCart = state.shoppingCart.find((item) => item._id === itemToInsert._id);
+            const isItemInCart = state.shoppingCart.find((item) => item._id === itemToInsert.payload._id);
             if(isItemInCart){
-                state.shoppingCart.map((item) => item._id === itemToInsert._id ? { ...item, amount: item.amount + 1} : item )
+                state.shoppingCart = state.shoppingCart.map((item) => item._id === itemToInsert.payload._id ? { ...item, amount: item.amount + 1} : item );
             }
             else{
-                state.shoppingCart = [...state.shoppingCart, {...itemToInsert, amount: 1}];
+                state.shoppingCart = [...state.shoppingCart, {_id: itemToInsert.payload._id, name: itemToInsert.payload.name, image: itemToInsert.payload.image, amount: 1}];
             }
+            console.log(state.shoppingCart);
         },
         removeItemFromCart(state, itemToRemove) {
-            const isItemInCart = state.shoppingCart.find((item) => item._id === itemToRemove._id);
+            const isItemInCart = state.shoppingCart.find((item) => item._id === itemToRemove.payload._id);
             if(isItemInCart && isItemInCart.amount > 1){
-                state.shoppingCart.map((item) => item._id === itemToRemove._id ? { ...item, amount: item.amount - 1} : item )
+                state.shoppingCart = state.shoppingCart.map((item) => item._id === itemToRemove.payload._id ? { ...item, amount: item.amount - 1} : item )
             }
-            else{
-                state.shoppingCart.filter((item) => item._id != itemToRemove._id );
+            else if(isItemInCart){
+                state.shoppingCart = state.shoppingCart.filter((item) => item._id != itemToRemove.payload._id );
             }
         },
         manualItemQuantityChangeInCart(state, itemToModify) {

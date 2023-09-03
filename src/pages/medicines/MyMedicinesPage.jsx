@@ -111,6 +111,7 @@ const MyCardsPage = () => {
                 name={item.name}
                 subTitle={item.subTitle}
                 description={item.description}
+                itemToAddOrRemove={{"_id": item._id, "name": item.name, "image": item.image}}
                 onDelete={handleDeleteFromInitialMedicinesArr}
                 onEdit={handleEditFromInitialMedicinesArr}
                 onLike={handleLikeFromMedicines}
@@ -119,6 +120,7 @@ const MyCardsPage = () => {
                 canDelete={payload && (payload.isAdmin || (payload.isPharma && item.pharma_id == payload._id))}
                 canLike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && !item.likes.includes(payload._id)}
                 canDislike={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor) && item.likes.includes(payload._id)}
+                canAddToCart={payload && (!payload.isAdmin && !payload.isPharma && !payload.isDoctor)}
                 isOwnedBySelf={item.pharma_id === payload._id}
                 />
             </Grid>

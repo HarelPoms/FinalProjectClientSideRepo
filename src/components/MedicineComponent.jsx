@@ -17,6 +17,9 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import HeartBrokenIcon from '@mui/icons-material/HeartBroken';
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import useShoppingCartAdd from "../hooks/useShoppingCartAdd";
+import useShoppingCartRemove from "../hooks/useShoppingCartRemove";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const MedicineComponent = ({
   id,
@@ -24,6 +27,7 @@ const MedicineComponent = ({
   name,
   subTitle,
   description,
+  itemToAddOrRemove,
   onDelete,
   onEdit,
   onLike,
@@ -32,13 +36,15 @@ const MedicineComponent = ({
   canDelete,
   canLike,
   canDislike,
+  canAddToCart,
   isOwnedBySelf
 }) => {
   const [likePossible, setLikePossible] = useState(canLike);
   const [dislikePossible, setDislikePossible] = useState(canDislike);
   const isLoggedIn = useSelector((bigState) => bigState.authSlice.isLoggedIn);
-
   const navigate = useNavigate();
+  const addToCartAction = useShoppingCartAdd();
+  const removeFromCartAction = useShoppingCartRemove();
 
   const handleDeleteBtnClick = () => {
     onDelete(id);
@@ -60,6 +66,14 @@ const MedicineComponent = ({
   }
   const openDetailsPage = () => {
     navigate(`/full_details_medicine/${id}`);
+  }
+
+  const handleAddToCart = () => {
+    addToCartAction(itemToAddOrRemove);
+  }
+
+  const handleRemoveFromCart = () => {
+    removeFromCartAction(itemToAddOrRemove);
   }
 
   return (
@@ -96,6 +110,13 @@ const MedicineComponent = ({
             </Button>
           </Fragment>
         ) : ("")}
+        {canAddToCart ? (
+          <Fragment>
+            <Button variant="text" color="secondary" onClick={handleAddToCart}>
+              <AddShoppingCartIcon />
+            </Button>
+          </Fragment>
+        ) : ""}
       </CardActions>
     </Card>
   );

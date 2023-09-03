@@ -21,6 +21,14 @@ import NavbarMenuLinks from "./NavbarMenuLinks";
 import NavbarNotAuthLinks from "./NavbarNotAuthLinks";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 import NavProfileMenuComponent from "./NavProfileMenuComponent";
+import Drawer from '@mui/material/Drawer';
+import ShoppingCart from "../ShoppingCart/ShoppingCart";
+import useShoppingCartRemove from "../../hooks/useShoppingCartRemove";
+import useShoppingCartAdd from "../../hooks/useShoppingCartAdd";
+import Badge from '@mui/material/Badge';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {Button} from "@mui/material";
+import "../../stylesheets/styledCartButton.css";
 
 const MuiNavbar = () => {
   const navigate = useNavigate();
@@ -29,7 +37,9 @@ const MuiNavbar = () => {
   const viewportSize = useResponsiveQueries();
   const [avatarURL,setAvatarURL] = useState(defaultAvatar);
   const [userName, setUserName] = useState("");
-  const payload = useSelector((bigPie) => bigPie.authSlice.payload); 
+  const payload = useSelector((bigPie) => bigPie.authSlice.payload);
+  const cartPayload = useSelector((bigPie) => bigPie.cartSlice.shoppingCart);
+  const [cartOpen, setCartOpen] = useState(false); 
   const isLoggedIn = useSelector(
     (bigPie) => bigPie.authSlice.isLoggedIn
   );
@@ -38,6 +48,8 @@ const MuiNavbar = () => {
   const isDarkTheme = useSelector(
     (bigPie) => bigPie.darkThemeSlice.isDarkTheme
   );
+  const addToCart = useShoppingCartAdd();
+  const removeFromCart = useShoppingCartRemove();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -70,10 +82,21 @@ const MuiNavbar = () => {
     return {data: data};
   }
 
-const getPharmaData = async (id) => {
-  let {data} = await axios.get("/pharmas/" + id);
-  return {data: data};
-}
+  const getPharmaData = async (id) => {
+    let {data} = await axios.get("/pharmas/" + id);
+    return {data: data};
+  }
+
+  const addItemToCart = (item) => {
+    addToCart(item);
+  }
+
+  const removeItemFromCart = (item) => {
+    removeFromCart(item)
+  }
+
+  const getTotalItems = (items) =>
+    items.reduce((acc, item) => acc + item.amount, 0);
 
   useEffect(() => {
         (async () => {
@@ -131,6 +154,17 @@ const getPharmaData = async (id) => {
               <LightModeIcon onClick={changeTheme}/> : ""}
               {isLoggedIn && isSearchUnfocused ? <NavProfileMenuComponent picSrc={avatarURL} userName={userName} /> : ""}
               {isSearchUnfocused && viewportSize !== "xs" && viewportSize !== "sm" ? <NavbarNotAuthLinks /> : ""}
+              {isLoggedIn && isSearchUnfocused ? 
+              <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+                <ShoppingCart cartItems={cartPayload} addToCart={addItemToCart} removeFromCart={removeItemFromCart} />
+              </Drawer> : ""}
+                
+                <Button onClick={() => setCartOpen(true)} className="cartBtn">
+                  <Badge badgeContent={getTotalItems(cartPayload)} color="error">
+                    <AddShoppingCartIcon />
+                  </Badge>
+                </Button>
+                
             </Box>
             
           </Box>
