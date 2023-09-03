@@ -1,17 +1,18 @@
 import { Button } from "@mui/material";
-import { Grid, Typography } from "@mui/material";
-import "../../stylesheets/imgSizeLimit.css";
+import { Grid, Typography, Divider } from "@mui/material";
+import "../../stylesheets/shoppingCartStyle.css";
 
 const ShoppingCartItem = ({ item, addToCart, removeFromCart }) => {
     
     return (
         <div>
             <div>
-                <h3>{item.name}</h3>
-                <div className="information">
-                {/* <p>Price: ${item.price}</p>
-                <p>Total: ${(item.amount * item.price).toFixed(2)}</p> */}
+                <h3 className="alignTextToCenter">{item.name}</h3>
+                <div className="alignTextToCenter">
+                    <p>Price: ${item.price}</p>
+                    <p>Total: ${(item.amount * item.price).toFixed(2)}</p>
                 </div>
+                <img src={item.image.url} alt={item.image.alt} className="previewImg" />
                 <Grid container spacing={1} align="center" direction="row">
                     <Grid item xs={5}>
                         <Button
@@ -39,7 +40,7 @@ const ShoppingCartItem = ({ item, addToCart, removeFromCart }) => {
                     
                 </Grid>
             </div>
-            <img src={item.image.url} alt={item.image.alt} className="previewImg" />
+            <Divider sx={{mt:1, bgcolor: "secondary.light"}} />
         </div>
     );
 };

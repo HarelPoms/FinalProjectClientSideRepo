@@ -25,7 +25,7 @@ import LoadingAnimationComponent from "../../components/LoadingAnimationComponen
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
 
 const NewCardPage = () => {
-    const startingInputVal = {name: "", subTitle: "", description: "", url: "", alt: "", prescription_required: false };
+    const startingInputVal = {name: "", subTitle: "", description: "", price: 10, url: "", alt: "", prescription_required: false };
     const startingInputErrVal = {};
     const [inputState, setInputState] = useState(startingInputVal);
     const [inputsErrorsState, setInputsErrorsState] = useState(startingInputErrVal);
@@ -116,6 +116,7 @@ const NewCardPage = () => {
                 <InputComponent id="name" label="Name" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="subTitle" label="Subtitle" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="description" label="Description" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
+                <InputComponent id="price" label="Price" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} isRequired={true} />
                 <InputComponent id="url" label="Image URL" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <Grid item xs={12}>

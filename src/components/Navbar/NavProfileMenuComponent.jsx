@@ -6,6 +6,7 @@ import { Avatar, IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/auth";
+import { shoppingCartActions } from "../../store/shoppingCart";
 import ROUTES from "../../routes/ROUTES";
 import {Divider} from "@mui/material";
 
@@ -26,6 +27,7 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
 
     const handleLogoutClick = () => {
         localStorage.clear();
+        dispatch(shoppingCartActions.clearCart());
         dispatch(authActions.logout());
     }
 

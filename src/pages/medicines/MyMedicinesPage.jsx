@@ -111,7 +111,7 @@ const MyCardsPage = () => {
                 name={item.name}
                 subTitle={item.subTitle}
                 description={item.description}
-                itemToAddOrRemove={{"_id": item._id, "name": item.name, "image": item.image}}
+                itemToAddOrRemove={{"_id": item._id, "name": item.name, "image": item.image, "price": item.price}}
                 onDelete={handleDeleteFromInitialMedicinesArr}
                 onEdit={handleEditFromInitialMedicinesArr}
                 onLike={handleLikeFromMedicines}

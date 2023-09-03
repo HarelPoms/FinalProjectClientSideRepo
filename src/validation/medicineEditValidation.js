@@ -10,6 +10,8 @@ const editMedicineSchema = Joi.object({
   [1,1,1])),
   description: Joi.string().min(2).max(1024).required().messages(generateMessages("Description", [2,1024], 0,
   [1,1,1])),
+  price: Joi.number().min(10).max(999).required().messages(generateMessages("Price", [2,3], 1,
+  [1,1,1])),
   url: Joi.string().min(6).max(1024).allow("").messages(generateMessages("URL", [6,1024], 0,
   [1,1])),
   alt: Joi.string().min(6).max(256).allow("").messages(generateMessages("ALT", [6,256], 0,

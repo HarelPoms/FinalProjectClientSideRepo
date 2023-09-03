@@ -158,12 +158,12 @@ const MuiNavbar = () => {
               <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <ShoppingCart cartItems={cartPayload} addToCart={addItemToCart} removeFromCart={removeItemFromCart} />
               </Drawer> : ""}
-                
-                <Button onClick={() => setCartOpen(true)} className="cartBtn">
-                  <Badge badgeContent={getTotalItems(cartPayload)} color="error">
-                    <AddShoppingCartIcon />
-                  </Badge>
-                </Button>
+              {isLoggedIn && <Button onClick={() => setCartOpen(true)} className="cartBtn">
+                <Badge badgeContent={getTotalItems(cartPayload)} color="error">
+                  <AddShoppingCartIcon />
+                </Badge>
+              </Button>}
+              
                 
             </Box>
             
