@@ -26,7 +26,7 @@ import ShoppingCart from "../ShoppingCart/ShoppingCart";
 import useShoppingCartRemove from "../../hooks/useShoppingCartRemove";
 import useShoppingCartAdd from "../../hooks/useShoppingCartAdd";
 import Badge from '@mui/material/Badge';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Button} from "@mui/material";
 import "../../stylesheets/styledCartButton.css";
 
@@ -160,13 +160,10 @@ const MuiNavbar = () => {
               </Drawer> : ""}
               {isLoggedIn && (!payload.isDoctor && !payload.isPharma && !payload.isAdmin) && <Button onClick={() => setCartOpen(true)} className="cartBtn">
                 <Badge badgeContent={getTotalItems(cartPayload)} color="error">
-                  <AddShoppingCartIcon />
+                  <ShoppingCartIcon />
                 </Badge>
               </Button>}
-              
-                
-            </Box>
-            
+            </Box>         
           </Box>
           {/* hamburger with menu */}
           {isSearchUnfocused ? <Box

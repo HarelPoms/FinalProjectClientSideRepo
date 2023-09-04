@@ -1,0 +1,16 @@
+.medicinePictureInCard {
+    height: 14rem;
+}
+
+.medicineCard {
+    height: 100%;
+}
+
+.MuiCard-root {
+    display: flex;
+    flex-direction: column;
+}
+
+.MuiCardActions-root {
+    margin-top: auto;
+}

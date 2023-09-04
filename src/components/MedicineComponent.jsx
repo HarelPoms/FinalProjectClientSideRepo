@@ -20,6 +20,7 @@ import { useSelector } from "react-redux";
 import useShoppingCartAdd from "../hooks/useShoppingCartAdd";
 import useShoppingCartRemove from "../hooks/useShoppingCartRemove";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import "../stylesheets/medicinePictureCardStyle.css";
 
 const MedicineComponent = ({
   id,
@@ -77,9 +78,9 @@ const MedicineComponent = ({
   }
 
   return (
-    <Card square raised>
+    <Card square raised className="medicineCard">
       <CardActionArea onClick={openDetailsPage}>
-        <CardMedia component="img" image={img} />
+        <CardMedia component="img" image={img} className="medicinePictureInCard"/>
       </CardActionArea>
       <CardHeader title={name} subheader={subTitle}></CardHeader>
       <CardContent>
