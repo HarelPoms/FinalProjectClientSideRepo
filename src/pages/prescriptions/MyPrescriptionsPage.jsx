@@ -126,7 +126,7 @@ const MyPrescriptionsPage = () => {
         {prescriptionsArr && prescriptionsArr.length > 0 && <Divider> My Prescriptions </Divider>}
         <Grid container spacing={2}>
             {prescriptionsArr.map((item) => (
-            <Grid item component={Card} xs={6} md={4} key={item._id + Date.now()}>
+            <Grid item xs={6} md={4} key={item._id + Date.now()}>
                 <PrescriptionComponent
                 id={item._id}
                 imgUrl={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderPrescriptionImg.png"}
