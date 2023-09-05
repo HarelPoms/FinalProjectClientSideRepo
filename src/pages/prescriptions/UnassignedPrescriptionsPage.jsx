@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Grid, Typography, Card } from "@mui/material";
 import PrescriptionComponent from "../../components/PrescriptionComponent";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -119,7 +119,7 @@ const MyPrescriptionsPage = () => {
         {prescriptionsArr && prescriptionsArr.length > 0 && <Divider> All Unassigned Prescriptions </Divider>}
         <Grid container spacing={2}>
             {prescriptionsArr.map((item) => (
-            <Grid item xs={6} md={4} key={item._id + Date.now()}>
+            <Grid item component={Card} xs={6} md={4} key={item._id + Date.now()}>
                 <PrescriptionComponent
                 id={item._id}
                 imgUrl={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderPrescriptionImg.png"}
