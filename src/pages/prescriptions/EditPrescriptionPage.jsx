@@ -184,7 +184,7 @@ const EditPrescriptionPage = () => {
                 <AddCardIcon />
             </Avatar>
             <Typography component="h1" variant="h4">
-                Submit Prescription Request
+                Edit Prescription Request
             </Typography>
             <Box
             component="img"
