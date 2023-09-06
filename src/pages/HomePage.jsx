@@ -115,6 +115,7 @@ const HomePage = () => {
               name={item.name}
               subTitle={item.subTitle}
               description={item.description}
+              isPrescriptionRequired={item.prescription_required}
               itemToAddOrRemove={{"_id": item._id, "name": item.name, "image": item.image, "price": item.price}}
               onDelete={handleDeleteFromInitialCardsArr}
               onEdit={handleEditFromInitialMedicineArr}

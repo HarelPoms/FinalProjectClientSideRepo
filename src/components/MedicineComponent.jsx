@@ -20,8 +20,11 @@ import { useSelector } from "react-redux";
 import useShoppingCartAdd from "../hooks/useShoppingCartAdd";
 import useShoppingCartRemove from "../hooks/useShoppingCartRemove";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import PublicIcon from '@mui/icons-material/Public';
 import "../stylesheets/medicinePictureCardStyle.css";
 import { toast } from "react-toastify";
+import Stack from '@mui/material/Stack';
 
 const MedicineComponent = ({
   id,
@@ -29,6 +32,7 @@ const MedicineComponent = ({
   name,
   subTitle,
   description,
+  isPrescriptionRequired,
   itemToAddOrRemove,
   onDelete,
   onEdit,
@@ -84,12 +88,15 @@ const MedicineComponent = ({
       <CardActionArea onClick={openDetailsPage}>
         <CardMedia component="img" image={img} className="medicinePictureInCard"/>
       </CardActionArea>
-      <CardHeader title={name + " " + String.fromCharCode(0x20aa) + itemToAddOrRemove.price} subheader={subTitle}>
-      </CardHeader>
-      <CardContent>
-        <Typography>{description}</Typography>
+      <Stack direction="row" alignItems="center" gap={1} sx={{justifyContent: "center"}}>
+        <CardHeader title={name + " " + String.fromCharCode(0x20aa) + itemToAddOrRemove.price} subheader={subTitle} sx={{textAlign:"center"}}>
+        </CardHeader>
+        {isPrescriptionRequired ? <ReceiptIcon /> : <PublicIcon />}
+      </Stack>
+      <CardContent sx={{textAlign:"center"}}>
+          <Typography>{description}</Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{justifyContent: "center"}}>
         {isLoggedIn && likePossible && !isOwnedBySelf ? 
         <Button variant="text" color="primary" onClick={handleLikeBtnClick}>
           <FavoriteIcon />
