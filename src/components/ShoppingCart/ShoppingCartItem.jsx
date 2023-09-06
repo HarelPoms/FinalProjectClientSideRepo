@@ -9,8 +9,8 @@ const ShoppingCartItem = ({ item, addToCart, removeFromCart }) => {
             <div>
                 <h3 className="alignTextToCenter">{item.name}</h3>
                 <div className="alignTextToCenter">
-                    <p>Price: ${item.price}</p>
-                    <p>Total: ${(item.amount * item.price).toFixed(2)}</p>
+                    <p>Price: {String.fromCharCode(0x20aa)}{item.price}</p>
+                    <p>Total: {String.fromCharCode(0x20aa)}{(item.amount * item.price).toFixed(2)}</p>
                 </div>
                 <img src={item.image.url} alt={item.image.alt} className="previewImg" />
                 <Grid container spacing={1} align="center" direction="row">

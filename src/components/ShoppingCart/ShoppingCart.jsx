@@ -19,7 +19,7 @@ const ShoppingCart = ({ cartItems, addToCart, removeFromCart }) => {
                 removeFromCart={removeFromCart}
                 />
             ))}
-            <h2 className="alignTextToCenter">Total: ${calculateTotal(cartItems).toFixed(2)}</h2>
+            <h2 className="alignTextToCenter">Total: {String.fromCharCode(0x20aa)}{calculateTotal(cartItems).toFixed(2)}</h2>
         </div>
     );
 };

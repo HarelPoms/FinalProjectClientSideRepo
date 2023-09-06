@@ -84,7 +84,8 @@ const MedicineComponent = ({
       <CardActionArea onClick={openDetailsPage}>
         <CardMedia component="img" image={img} className="medicinePictureInCard"/>
       </CardActionArea>
-      <CardHeader title={name} subheader={subTitle}></CardHeader>
+      <CardHeader title={name + " " + String.fromCharCode(0x20aa) + itemToAddOrRemove.price} subheader={subTitle}>
+      </CardHeader>
       <CardContent>
         <Typography>{description}</Typography>
       </CardContent>
