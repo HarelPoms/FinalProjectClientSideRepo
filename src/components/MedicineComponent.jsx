@@ -21,6 +21,7 @@ import useShoppingCartAdd from "../hooks/useShoppingCartAdd";
 import useShoppingCartRemove from "../hooks/useShoppingCartRemove";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import "../stylesheets/medicinePictureCardStyle.css";
+import { toast } from "react-toastify";
 
 const MedicineComponent = ({
   id,
@@ -71,6 +72,7 @@ const MedicineComponent = ({
 
   const handleAddToCart = () => {
     addToCartAction(itemToAddOrRemove);
+    toast.success("Item successfully added to cart");
   }
 
   const handleRemoveFromCart = () => {
