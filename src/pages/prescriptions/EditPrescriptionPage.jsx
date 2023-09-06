@@ -11,6 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MedicationIcon from '@mui/icons-material/Medication';
+import Divider from '@mui/material/Divider';
 import {List} from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -216,9 +217,14 @@ const EditPrescriptionPage = () => {
                         </ListItem>
                     ))}
                 </List>
+                {inputState.medicineList.length < 5 ? 
                 <Grid item xs={12} className="addMedicineToPrescriptionDialogBtn">
                     <AddMedicineToPrescriptionDialogComponent isDialogOpen={openNewMedicineDialog} handleClickOpenFromFather={handleCreateClick} handleClickCancelFromFather={handleCancelClick} handleAddMedicineToPrescriptionFromFather={handleSubmitClick}  />
-                </Grid>
+                </Grid> : 
+                <Grid item xs={12} className="medicineLimitCentered">
+                    <Divider>Reached 5 medicine limit for prescription</Divider> 
+                </Grid>}
+                
                 <Grid item xs={6}>
                     <CancelButtonComponent />
                 </Grid>

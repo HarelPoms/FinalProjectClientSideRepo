@@ -9,3 +9,7 @@
 .prescriptionCardsUniformHeight {
     display: flex;
 }
+
+.medicineLimitCentered {
+    text-align: center;
+}
