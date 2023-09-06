@@ -5,3 +5,7 @@
 .medicineItemsListInPrescription {
     margin: auto;
 }
+
+.prescriptionCardsUniformHeight {
+    display: flex;
+}

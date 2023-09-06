@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
 import filterPrescriptionsByPatientOrDoctorName from "../../services/prescriptionFilterUtil";
+import "../../stylesheets/prescriptionStyle.css";
 
 const MyPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);
@@ -126,7 +127,7 @@ const MyPrescriptionsPage = () => {
         {prescriptionsArr && prescriptionsArr.length > 0 && <Divider> My Prescriptions </Divider>}
         <Grid container spacing={2}>
             {prescriptionsArr.map((item) => (
-            <Grid item xs={6} md={4} key={item._id + Date.now()}>
+            <Grid item xs={6} md={4} key={item._id + Date.now()} className="prescriptionCardsUniformHeight">
                 <PrescriptionComponent
                 id={item._id}
                 imgUrl={item.image && isImage(item.image.url) ? item.image.url : "/assets/images/placeholderPrescriptionImg.png"}
