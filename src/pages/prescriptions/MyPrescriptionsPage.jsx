@@ -11,6 +11,7 @@ import LoadingAnimationComponent from "../../components/LoadingAnimationComponen
 import isImage from "../../validation/isImgUrlValid";
 import filterPrescriptionsByPatientOrDoctorName from "../../services/prescriptionFilterUtil";
 import "../../stylesheets/prescriptionStyle.css";
+import "../../stylesheets/alignText.css";
 
 const MyPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);
@@ -122,7 +123,7 @@ const MyPrescriptionsPage = () => {
     }
     return (
         <Box>
-        <Typography variant="h1"> My Prescriptions Page </Typography>
+        <Typography variant="h1" className="alignTextToCenter"> My Prescriptions Page </Typography>
         {prescriptionsArr && prescriptionsArr.length === 0 && <Divider> You have no prescriptions </Divider>}
         {prescriptionsArr && prescriptionsArr.length > 0 && <Divider> My Prescriptions </Divider>}
         <Grid container spacing={2}>

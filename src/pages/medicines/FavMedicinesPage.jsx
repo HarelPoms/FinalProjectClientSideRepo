@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
 import CheckIfNumberStartsWithPrefix from "../../services/checkPrefixNumsUtil";
+import "../../stylesheets/alignText.css";
 
 const FavMedicinesPage = () => {
     const [originalMedsArr, setOriginalMedsArr] = useState(null);
@@ -100,8 +101,8 @@ const FavMedicinesPage = () => {
     }
     return (
         <Box>
-        <Typography variant="h1"> My Favorite Cards Page </Typography>
-        <Typography variant="h3"> Cards I've favorited </Typography>
+        <Typography variant="h2" className="alignTextToCenter"> My Favorite Medicines Page </Typography>
+        <Typography variant="h3" className="alignTextToCenter"> Medicines I've favorited </Typography>
         {medsArr && medsArr.length === 0 && <Divider sx={{mb:20, mt:10}}> You have no favorite medicines </Divider>}
         {medsArr && medsArr.length > 0 && <Divider> My Favorited Medicines </Divider>}
         <Grid container spacing={2}>

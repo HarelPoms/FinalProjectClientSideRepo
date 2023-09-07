@@ -111,7 +111,7 @@ const PrescriptionComponent = ({
       <CardActionArea onClick={openDetailsPage}>
         <CardMedia component="img" image={imgUrl} />
       </CardActionArea>
-      <CardContent>
+      <CardContent sx={{textAlign:"center"}}>
         <Typography>Patient Name : {prescriptionDetailsState.patientName}</Typography>
         <Typography>Doctor Name : {prescriptionDetailsState.doctorName}</Typography>
         <Typography>HMO Name : {prescriptionDetailsState.hmoName}</Typography>
@@ -131,7 +131,7 @@ const PrescriptionComponent = ({
               ))}
           </List>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{justifyContent: "center"}}>
         {canEdit ? (
           <Fragment>
             <Button variant="text" color="warning" onClick={handleEditBtnClick}>

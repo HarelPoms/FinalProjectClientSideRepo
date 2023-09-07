@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
 import isImage from "../validation/isImgUrlValid";
 import CheckIfNumberStartsWithPrefix from "../services/checkPrefixNumsUtil";
+import "../stylesheets/alignText.css";
 
 const HomePage = () => {
   const [originalMedsArr, setOriginalMedsArr] = useState(null);
@@ -103,8 +104,8 @@ const HomePage = () => {
       <Typography variant="h5"> Welcome to MedManage: Your Complete Prescription Management Solution
                                 Are you tired of keeping track of multiple prescriptions and struggling to remember when to take your medications? Look no further! MedManage is your one-stop solution for efficient and hassle-free medicine and prescription management.
       </Typography>
-      <Typography variant="h2"> Medicines Page </Typography>
-      <Typography variant="h3"> Here you can find medicines </Typography>
+      <Typography variant="h2" className="alignTextToCenter"> Medicines Page </Typography>
+      <Typography variant="h3" className="alignTextToCenter"> Here you can find medicines </Typography>
       <Divider> Medicines on display </Divider>
       <Grid container spacing={2}>
         {medsArr.map((item) => (
