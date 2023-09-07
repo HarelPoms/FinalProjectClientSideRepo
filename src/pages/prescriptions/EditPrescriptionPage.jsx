@@ -213,10 +213,6 @@ const EditPrescriptionPage = () => {
                                     <MedicationIcon />
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`}  />
-                                {/* <ListItemButton id={getCurrUniqueId()} name={getCurrUniqueId()} onClick={deleteItemFromMedicineList}>
-                                    <CancelIcon>
-                                    </CancelIcon>
-                                </ListItemButton> */}
                             </ListItemButton>
                         </ListItem>
                     ))}
