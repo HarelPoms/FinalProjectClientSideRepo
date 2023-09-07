@@ -119,17 +119,17 @@ const PrescriptionComponent = ({
         <Typography>Is valid : {formatIsAvailable(isActive)}</Typography>
         <Typography>Is Approved: {formatIsAvailable(isApproved)}</Typography>
         <List>
-              {prescriptionDetailsState.medicineList.map((item) => (
-                  <ListItem disablePadding key={item._id + Date.now()}>
-                      <ListItemButton>
-                          <ListItemIcon>
-                              <MedicationIcon />
-                          </ListItemIcon>
-                          <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
-                      </ListItemButton>
-                  </ListItem>
-              ))}
-          </List>
+          {prescriptionDetailsState.medicineList.map((item) => (
+              <ListItem disablePadding key={item._id + Date.now()}>
+                  <ListItemButton>
+                      <ListItemIcon>
+                          <MedicationIcon />
+                      </ListItemIcon>
+                      <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
+                  </ListItemButton>
+              </ListItem>
+          ))}
+        </List>
       </CardContent>
       <CardActions sx={{justifyContent: "center"}}>
         {canEdit ? (
