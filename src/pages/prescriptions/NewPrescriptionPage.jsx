@@ -11,6 +11,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
 import MedicationIcon from '@mui/icons-material/Medication';
 import {List} from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -158,16 +159,19 @@ const NewPrescriptionPage = () => {
                 <InputComponent id="alt" label="Image ALT" inputState={inputState} inputsErrorsState={inputsErrorsState} handleInputChange={handleInputChange} />
                 <List sx={{margin:"auto"}}>
                     {inputState.medicineList.map((item) => (
-                        <ListItem disablePadding key={myUniqueId(item.medicineName)}>
+                        <ListItem disablePadding key={myUniqueId(item.medicineName)} secondaryAction={
+                        <IconButton id={getCurrUniqueId()} name={getCurrUniqueId()} onClick={deleteItemFromMedicineList} edge="end" aria-label="delete">
+                            <CancelIcon />
+                        </IconButton>}>
                             <ListItemButton>
                                 <ListItemIcon>
                                     <MedicationIcon />
                                 </ListItemIcon>
                                 <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`}  />
-                                <ListItemButton id={getCurrUniqueId()} name={getCurrUniqueId()} onClick={deleteItemFromMedicineList}>
+                                {/* <ListItemButton id={getCurrUniqueId()} name={getCurrUniqueId()} onClick={deleteItemFromMedicineList}>
                                     <CancelIcon>
                                     </CancelIcon>
-                                </ListItemButton>
+                                </ListItemButton> */}
                             </ListItemButton>
                         </ListItem>
                     ))}
