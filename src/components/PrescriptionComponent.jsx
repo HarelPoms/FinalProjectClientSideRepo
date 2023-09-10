@@ -25,6 +25,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import formatDate from "../services/formatDateUtil";
+import useResponsiveQueries from "../hooks/useResponsiveQueries";
 
 const PrescriptionComponent = ({
   id,
@@ -55,6 +56,7 @@ const PrescriptionComponent = ({
   const [prescriptionDetailsState, setPrescriptionState] = useState(prescriptionDetailsStartingVal);
 
   const navigate = useNavigate();
+  const viewportSize = useResponsiveQueries();
   const payload = useSelector((bigPie) => bigPie.authSlice.payload);
 
   const formatIsAvailable = (validBool) => {
@@ -120,11 +122,12 @@ const PrescriptionComponent = ({
         <Typography>Is Approved: {formatIsAvailable(isApproved)}</Typography>
         <List>
           {prescriptionDetailsState.medicineList.map((item) => (
-              <ListItem disablePadding key={item._id + Date.now()}>
+              <ListItem disablePadding key={item._id + Date.now()} className="prescriptionListItem">
                   <ListItemButton>
-                      <ListItemIcon>
+                    {viewportSize !== "sm" ? <ListItemIcon>
                           <MedicationIcon />
-                      </ListItemIcon>
+                      </ListItemIcon> : ""}
+                      
                       <ListItemText primary={`${item.medicineName} [${item.medicineUnits}]`} secondary={`Is Available : ${formatIsAvailable(item.isActive)}`} />
                   </ListItemButton>
               </ListItem>
