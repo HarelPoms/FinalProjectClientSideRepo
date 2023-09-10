@@ -13,7 +13,7 @@ import filterPrescriptionsByPatientOrDoctorName from "../../services/prescriptio
 import "../../stylesheets/prescriptionStyle.css";
 import "../../stylesheets/alignText.css";
 
-const MyPrescriptionsPage = () => {
+const UnassignedPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);
     const [prescriptionsArr, setPrescriptionsArr] = useState(null);
     const navigate = useNavigate();
@@ -149,4 +149,4 @@ const MyPrescriptionsPage = () => {
 };
 
 
-export default MyPrescriptionsPage;
+export default UnassignedPrescriptionsPage;
