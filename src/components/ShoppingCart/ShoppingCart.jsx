@@ -1,5 +1,5 @@
 import ShoppingCartItem from "./ShoppingCartItem";
-import "../../stylesheets/shoppingCartStyle.css";
+import "../../stylesheets/mainStyle.css";
 import { Divider } from "@mui/material";
 
 const ShoppingCart = ({ cartItems, addToCart, removeFromCart }) => {

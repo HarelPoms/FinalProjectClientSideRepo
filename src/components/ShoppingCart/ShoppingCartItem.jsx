@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import { Grid, Typography, Divider } from "@mui/material";
-import "../../stylesheets/shoppingCartStyle.css";
+import "../../stylesheets/mainStyle.css";
 
 const ShoppingCartItem = ({ item, addToCart, removeFromCart }) => {
     

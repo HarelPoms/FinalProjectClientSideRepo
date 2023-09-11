@@ -1,0 +1,34 @@
+.addMedicineToPrescriptionDialogBtn {
+    text-align: center;
+}
+
+.medicineItemsListInPrescription {
+    margin: auto;
+}
+
+.prescriptionCardsUniformHeight {
+    display: flex;
+}
+
+.medicineLimitCentered {
+    text-align: center;
+}
+
+.prescriptionListItem {
+    margin-left: 4rem;
+    
+    @include for-size(big-desktop){
+        margin-left: 1rem;
+    }
+    @include for-size(desktop){
+        left: 2rem;
+    }
+
+    @include for-size(tablet-landscape)
+    {
+        left: -1rem;
+    }
+    @include for-size(tablet-portrait){
+        right: 0.1rem;
+    }
+}

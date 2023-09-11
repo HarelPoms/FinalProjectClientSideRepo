@@ -22,7 +22,7 @@ import useShoppingCartRemove from "../hooks/useShoppingCartRemove";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import PublicIcon from '@mui/icons-material/Public';
-import "../stylesheets/medicinePictureCardStyle.css";
+import "../stylesheets/mainStyle.css";
 import { toast } from "react-toastify";
 import Stack from '@mui/material/Stack';
 

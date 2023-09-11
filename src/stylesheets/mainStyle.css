@@ -1,0 +1,70 @@
+.alignTextToCenter {
+  text-align: center;
+}
+
+.medicinePictureInCard {
+  height: 14rem;
+}
+
+.medicineCard {
+  height: 100%;
+}
+
+.MuiCard-root {
+  display: flex;
+  flex-direction: column;
+}
+
+.MuiCardActions-root {
+  margin-top: auto;
+}
+
+.cartBtn {
+  position: fixed;
+  z-index: 100;
+}
+
+.previewImg {
+  max-width: 15rem;
+  max-height: 15rem;
+}
+
+.addMedicineToPrescriptionDialogBtn {
+  text-align: center;
+}
+
+.medicineItemsListInPrescription {
+  margin: auto;
+}
+
+.prescriptionCardsUniformHeight {
+  display: flex;
+}
+
+.medicineLimitCentered {
+  text-align: center;
+}
+
+.prescriptionListItem {
+  margin-left: 4rem;
+}
+@media (max-width: 1400px) {
+  .prescriptionListItem {
+    margin-left: 1rem;
+  }
+}
+@media (max-width: 1200px) {
+  .prescriptionListItem {
+    left: 2rem;
+  }
+}
+@media (max-width: 992px) {
+  .prescriptionListItem {
+    left: -1rem;
+  }
+}
+@media (max-width: 768px) {
+  .prescriptionListItem {
+    right: 0.1rem;
+  }
+}/*# sourceMappingURL=mainStyle.css.map */

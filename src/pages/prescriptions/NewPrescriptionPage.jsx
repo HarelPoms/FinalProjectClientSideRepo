@@ -30,7 +30,7 @@ import RefreshButtonComponent from "../../components/RefreshButtonComponent";
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import AddMedicineToPrescriptionDialogComponent from "../../components/AddMedicineToPrescriptionDialogComponent";
 import useResponsiveQueries from "../../hooks/useResponsiveQueries";
-import "../../stylesheets/prescriptionStyle.css";
+import "../../stylesheets/mainStyle.css";
 
 const NewPrescriptionPage = () => {
     let medCounter = 0;

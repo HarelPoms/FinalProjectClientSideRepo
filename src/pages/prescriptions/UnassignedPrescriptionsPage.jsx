@@ -10,8 +10,7 @@ import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
 import filterPrescriptionsByPatientOrDoctorName from "../../services/prescriptionFilterUtil";
-import "../../stylesheets/prescriptionStyle.css";
-import "../../stylesheets/alignText.css";
+import "../../stylesheets/mainStyle.css";
 
 const UnassignedPrescriptionsPage = () => {
     const [originalPrescriptionsArr, setOriginalPrescriptionsArr] = useState(null);

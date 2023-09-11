@@ -28,7 +28,7 @@ import useShoppingCartAdd from "../../hooks/useShoppingCartAdd";
 import Badge from '@mui/material/Badge';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {Button} from "@mui/material";
-import "../../stylesheets/styledCartButton.css";
+import "../../stylesheets/mainStyle.css";
 
 const MuiNavbar = () => {
   const navigate = useNavigate();

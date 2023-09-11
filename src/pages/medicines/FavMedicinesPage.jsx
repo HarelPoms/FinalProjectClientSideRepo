@@ -10,7 +10,7 @@ import Divider from '@mui/material/Divider';
 import LoadingAnimationComponent from "../../components/LoadingAnimationComponent";
 import isImage from "../../validation/isImgUrlValid";
 import CheckIfNumberStartsWithPrefix from "../../services/checkPrefixNumsUtil";
-import "../../stylesheets/alignText.css";
+import "../../stylesheets/mainStyle.css";
 
 const FavMedicinesPage = () => {
     const [originalMedsArr, setOriginalMedsArr] = useState(null);

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import { styled } from '@mui/material/styles';
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
-import "../stylesheets/alignText.css";
+import "../stylesheets/mainStyle.css";
 
 const Img = styled('img')({
     margin: 'auto',

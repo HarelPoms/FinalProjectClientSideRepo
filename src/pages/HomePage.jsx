@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import LoadingAnimationComponent from "../components/LoadingAnimationComponent";
 import isImage from "../validation/isImgUrlValid";
 import CheckIfNumberStartsWithPrefix from "../services/checkPrefixNumsUtil";
-import "../stylesheets/alignText.css";
+import "../stylesheets/mainStyle.css";
 
 const HomePage = () => {
   const [originalMedsArr, setOriginalMedsArr] = useState(null);
