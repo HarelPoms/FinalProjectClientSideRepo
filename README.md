@@ -68,3 +68,8 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+MedManage - A system made to assist patients to manage their medicines and prescriptions, and attain approval for prescription requests by a doctor, enables a doctor to overview prescriptions of patients from the same HMO, and to assume responsibility for them, approve them, edit them or delete them as necessary.
+There also exists an option for pharmas to have their own particular user in order to register new medicine and edit/delete medicine that is their own. In addition, a patient can favorite medicines, and add medicines to the shopping Cart.
+
