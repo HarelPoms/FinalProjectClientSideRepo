@@ -4,16 +4,13 @@ import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
 import { Avatar, IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/auth";
 import { shoppingCartActions } from "../../store/shoppingCart";
-import ROUTES from "../../routes/ROUTES";
 import {Divider} from "@mui/material";
 
 const ProfileMenuComponent = ({picSrc, userName }) => {
     const [anchorEl2, setAnchorEl2] = useState(null);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const handleClick = (event) => {
         setAnchorEl2(event.currentTarget);
@@ -21,9 +18,6 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
     const handleClose = () => {
         setAnchorEl2(null);
     };
-    const handleProfileClick = () => {
-        navigate(ROUTES.PROFILE);
-    }
 
     const handleLogoutClick = () => {
         localStorage.clear();
@@ -55,7 +49,6 @@ const ProfileMenuComponent = ({picSrc, userName }) => {
             <MenuItem>{userName}</MenuItem>
             }
             <Divider></Divider>
-            <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
             <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
         </Menu>
         </div>

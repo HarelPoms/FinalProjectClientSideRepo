@@ -70,10 +70,6 @@ const PrescriptionComponent = ({
     onEdit(id);
   };
 
-  const openDetailsPage = () => {
-    navigate(`/full_details_prescription/${id}`);
-  }
-
   const handleAssumeResponsibilityClick = () => {
     onAssumeResponsibility(id, payload._id);
   }
@@ -110,7 +106,7 @@ const PrescriptionComponent = ({
 
   return (
     <Card square raised>
-      <CardActionArea onClick={openDetailsPage}>
+      <CardActionArea>
         <CardMedia component="img" image={imgUrl} />
       </CardActionArea>
       <CardContent sx={{textAlign:"center"}}>
