@@ -70,6 +70,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-MedManage - A system made to assist patients to manage their medicines and prescriptions, and attain approval for prescription requests by a doctor, enables a doctor to overview prescriptions of patients from the same HMO, and to assume responsibility for them, approve them, edit them or delete them as necessary.
-There also exists an option for pharmas to have their own particular user in order to register new medicine and edit/delete medicine that is their own. In addition, a patient can favorite medicines, and add medicines to the shopping Cart.
+MedManage - A system made to assist patients to manage their medicines and prescriptions, and attain approval for prescription requests by a doctor.
 
+Patients - A patient can favorite medicines, and add medicines to the shopping Cart. A patient may create a prescription request for certain medicines, in order that it might be assumed responsibility over and approved by a doctor from his own HMO.
+
+Doctors - enables a doctor to overview prescriptions of patients from the same HMO, and to assume responsibility for them, approve them, edit them or delete them as necessary. 
+A doctor may also examine the different medicines in order to make an informed decision.
+
+Pharmas - Pharma users can perform CRUD operations for medicine, in order to make them available for patients to request in prescriptions and thus allow doctors to approve said prescriptions.
