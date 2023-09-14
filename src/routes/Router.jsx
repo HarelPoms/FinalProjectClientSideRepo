@@ -16,6 +16,7 @@ import EditPrescriptionPage from "../pages/prescriptions/EditPrescriptionPage";
 import MyPatientsPage from "../pages/patients/MyPatientsPage";
 import PermissionsProtectedRoute from "../components/Route_Components/PermissionsProtectedRoute";
 import LoggedInRoute from "../components/Route_Components/LoggedInRoute";
+import ContactUsPage from "../pages/ContactUs";
 import ROUTES from "./ROUTES";
 
 const Router = () => {
@@ -35,6 +36,7 @@ const Router = () => {
       <Route path={ROUTES.EDITMEDICINE} element={<PermissionsProtectedRoute isAdmin={true} isDoc={false} isDocOrAdmin={false} isPharma={true} element={<EditMedicinePage />} />} />
       <Route path={ROUTES.MYPATIENTS} element={<PermissionsProtectedRoute isAdmin={false} isDoc={true} isDocOrAdmin={false} isPharma={false} element={<MyPatientsPage />} />} />
       <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+      <Route path={ROUTES.CONTACT_US} element={<ContactUsPage />} />
       <Route
         path={ROUTES.LOGOUT}
         element={<LoggedInRoute element={<LogoutPage />} />}

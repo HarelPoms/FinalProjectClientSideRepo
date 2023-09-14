@@ -20,7 +20,8 @@ const ROUTES = {
   LOGOUT: "/logout",
   FULLDETAILSMEDICINE: "/full_details_medicine/:id",
   FULLDETAILSPRESCRIPTION: "/full_details_prescription/:id",
-  ABOUT: "/about_us"
+  ABOUT: "/about_us",
+  CONTACT_US : "/contact_us"
 };
 
 export default ROUTES;

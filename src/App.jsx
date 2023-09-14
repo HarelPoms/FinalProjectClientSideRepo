@@ -18,6 +18,7 @@ import Box from "@mui/material/Box";
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import InfoIcon from '@mui/icons-material/Info';
+import ContactPageIcon from '@mui/icons-material/ContactPage';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import ROUTES from "./routes/ROUTES";
@@ -52,6 +53,9 @@ function App() {
   }
   const handleToMyPrescriptionsClick = () => {
     navigate(ROUTES.MYPRESCRIPTIONS);
+  }
+  const handleToContactUsClick = () => {
+    navigate(ROUTES.CONTACT_US);
   }
   
   useEffect(() => {
@@ -91,8 +95,10 @@ function App() {
               }}
             >
               <BottomNavigationAction label="About" icon={<InfoIcon />} onClick={handleToAboutClick}/>
+              <BottomNavigationAction label="Contact Us" icon={<ContactPageIcon />} onClick={handleToContactUsClick}/>
               {payload && (!payload.isPharma && !payload.isAdmin && !payload.isDoctor) && <BottomNavigationAction label="Favorite Medicines" icon={<FavoriteIcon />} onClick={handleToFavMedicinesClick}/>}
               {payload && ((!payload.isPharma && !payload.isAdmin) || payload.isDoctor) && <BottomNavigationAction label="My Prescriptions" icon={<FormatListBulletedIcon />} onClick={handleToMyPrescriptionsClick}/>}
+              
             </BottomNavigation>
           </Box>
         </footer>
