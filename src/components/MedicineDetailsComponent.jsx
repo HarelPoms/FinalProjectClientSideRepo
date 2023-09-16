@@ -4,8 +4,7 @@ import {
     CardMedia,
     CardHeader,
     CardContent,
-    Typography,
-    CardActions,
+    Typography
 } from "@mui/material";
 import PropTypes from "prop-types";
 import isImage from "../validation/isImgUrlValid";
@@ -36,7 +35,8 @@ MedicineDetailsComponent.propTypes = {
     description: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
     alt: PropTypes.string.isRequired,
-    medicineNumber: PropTypes.number.isRequired
+    medicineNumber: PropTypes.number.isRequired,
+    price: PropTypes.number.isRequired
 };
 
 MedicineDetailsComponent.defaultProps = {
