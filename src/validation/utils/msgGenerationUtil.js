@@ -8,7 +8,7 @@ const getKeyByValue = (object, value) => {
 //msgIncludeIndicatorArr = [0,0,0,1] => only string.pattern.base etc
 const generateMessages = ( msgSubject, msgLimitVarArr, msgType, msgIncludeIndicatorArr) => {
     const stringMsgTypeArr = {"string.min": 0, "string.max": 1, "string.empty": 2, "string.pattern.base": 3, "string.email": 4};
-    const stringMsgs = ["XX should be at least YY ZZ long", "XX should be at most YY ZZ long", "XX cannot be empty", "XX must contain at least one Uppercase letter and one Smallcase letter", "XX Must be valid"]
+    const stringMsgs = ["XX should be at least YY ZZ long", "XX should be at most YY ZZ long", "XX cannot be empty", "XX must contain at least one Uppercase letter and one Smallcase letter, 4 numbers, and one of these symbols @#$%^&*_\\-", "XX Must be valid"]
     const numberMsgs = ["XX should be at least YY ZZ long", "XX should be at most YY ZZ long","XX Must be a Number"];
     const numberMsgTypeArr = {"number.min": 0, "number.max": 1, "number.base" : 2};
     const typeUnits = ["characters", "digits"];

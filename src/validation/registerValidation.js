@@ -16,10 +16,10 @@ const registerSchema = Joi.object({
   .pattern(new RegExp(/^(?:0\d{1,2}-\d{7}|(?:\+|00)\d{1,3}\s?\d{4,14})$/)).required().messages({"string.pattern.base": "Phone must be of valid format e.g. 052-1234567", "string.empty": "Phone cannot be empty"}),
   email: Joi.string().min(5).max(255).required().email({ tlds: { allow: false } }).messages(generateMessages("Email", [5,255], 0, [1,1,1,0,1])),
   password: Joi.string()
-  .pattern(new RegExp("^(?=.*[A-Z])(?=.*[a-z]).{0,}$"))
-  .min(6)
-  .max(1024)
-  .required().messages(generateMessages("Password", [6,1024], 0,
+  .pattern(new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d.*\d.*\d.*\d)(?=.*[!@#$%^&*_\\-])[A-Za-z\d!@#$%^&*_\\-]{8,}$/))
+  .min(8)
+  .max(16)
+  .required().messages(generateMessages("Password", [8,16], 0,
   [1,1,1,1])),
   imageUrl: Joi.string().min(6).max(1024).allow("").messages(generateMessages("Image URL", [6,1024], 0,
   [1,1])),

@@ -11,7 +11,7 @@ import PropTypes from "prop-types";
 import isImage from "../validation/isImgUrlValid";
 
 const MedicineDetailsComponent = ({
-    name, subTitle, description, url, alt, medicineNumber
+    name, subTitle, description, url, alt, medicineNumber, price
 }) => {
 
 return (
@@ -23,7 +23,8 @@ return (
     <CardContent>
         <Typography variant="h3">Medicine details</Typography>
         <Typography>{description}</Typography>
-        <Typography sx={{ mb: 2 }}>Medicine Number : {medicineNumber}</Typography>    
+        <Typography sx={{ mb: 2 }}>Medicine Number : {medicineNumber}</Typography>
+        <Typography>Price : {String.fromCharCode(0x20aa)}{price}</Typography>
     </CardContent>
     </Card>
 );
