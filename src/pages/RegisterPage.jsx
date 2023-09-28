@@ -175,7 +175,7 @@ const RegisterPage = () => {
 
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox id="doctor" checked={inputState.isDoctor} onChange={handleCheckboxChange} color="primary" />}
+                control={<Checkbox id="isDoctor" checked={inputState.isDoctor} onChange={handleCheckboxChange} color="primary" />}
                 label="Register as Doctor"
               />
             </Grid>

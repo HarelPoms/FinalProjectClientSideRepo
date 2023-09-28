@@ -17,9 +17,15 @@ const ContactUsPage = () => {
             <Typography variant="h2" className="alignTextToCenter">How to contact us:</Typography>
             <Grid container spacing={2}>
                 <Grid item xs={5} sm={5} sx={{mt:5, ml:1}}>
-                    <Typography className="aboutTypography alignTextToCenter">Telephone : 03-5461232</Typography>
-                    <Typography className="aboutTypography alignTextToCenter">Fax : +44 161 999 8888</Typography>
-                    <Typography className="aboutTypography alignTextToCenter">Address : 221B Baker St., London</Typography>
+                    <Typography className="aboutTypography alignTextToCenter">
+                        Telephone : 03-5461232
+                    </Typography>
+                    <Typography className="aboutTypography alignTextToCenter">
+                        Fax : +44 161 999 8888
+                    </Typography>
+                    <Typography className="aboutTypography alignTextToCenter">
+                        Address : 221B Baker St., London
+                    </Typography>
                 </Grid>
                 <Grid item xs={6} sm={6} md={6} >
                     <Img alt="contact us image" src={"/assets/images/telephone.jpg"} />
